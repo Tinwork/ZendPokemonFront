@@ -24,6 +24,7 @@
     "webpack-dev-server": "^2.4.1"
   },
   "dependencies": {
-    "lodash": "^4.17.4"
+    "lodash": "^4.17.4",
+    "redux": "^3.6.0"
   }
 }
