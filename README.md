@@ -5,6 +5,9 @@ Front of the ZendPokemon project
 # Requirements 
 
 * NodeJS 
+* React 
+* Webpack 2 
+* Babel react 
 
 # Init the project  
 
