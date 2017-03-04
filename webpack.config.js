@@ -23,10 +23,17 @@ module.exports = {
     },
     output : {
         filename : 'bundle.js',
-        path : path.resolve(__dirname, 'dist')
+        path : path.resolve(__dirname, './app/dist')
     },
     resolve : {
         extensions : ['.js', '.jsx']
+    },
+    devServer : {
+        contentBase : [path.join(__dirname, 'app'), path.join(__dirname, 'dist')],
+        hotOnly : true,
+        watchContentBase : true,
+        compress : true,
+        port : 9000
     },
     plugins: [
         new webpack.optimize.CommonsChunkPlugin({

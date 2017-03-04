@@ -2,15 +2,13 @@
  *  Fetch 
  *      Making a request toward the back-end 
  */
-const fetch = (() => {
+export const fetch = (() => {
 
     // Creating the variable that will be available accross the fetch function
     let req,
         reqHeaders = new Headers(),
         reqParams = Object.create({})
         fetchResp  = Object.create({});
-    
-    let headers = new Headers();
     
     /**
      *  Prepare 
@@ -19,6 +17,7 @@ const fetch = (() => {
      *  @param {String} method 
      *  @return {Object} <this>
      *  @private 
+     *  @chainable
      */
     let prepare = function(API_URL, method = 'POST'){
         req = new Request(API_URL)
@@ -33,6 +32,7 @@ const fetch = (() => {
      *  @param {Mixed} Object 
      *  @return {Object} <this>
      *  @private 
+     *  @chainable
      */
     let setParams = function(headers, mixed){
         let headers = Object.create()
@@ -56,6 +56,7 @@ const fetch = (() => {
      *          * Promise return the this if success 
      *  @return {Promise} Promise {}
      *  @private
+     *  @chainable
      */
     let execute = function(){
         return fetch(req).then(function(response){
