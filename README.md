@@ -8,6 +8,7 @@ Front of the ZendPokemon project
 * React 
 * Webpack 2 
 * Babel react 
+* Sass  
 
 # Init the project  
 
@@ -31,3 +32,4 @@ Running the project will create a server on port **8080**. To run the project us
 ```shell 
 npm start
 ```
+
