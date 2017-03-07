@@ -1,13 +1,19 @@
-const path = require('path');
-const webpack = require('webpack');
+const path = require('path')
+const webpack = require('webpack')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 module.exports = {
     context : path.resolve(__dirname, './app'),
     module : {
-        loaders : [{
+        rules : [{
+            test : /\.(css|scss)$/,
+            use  : ExtractTextPlugin.extract({
+                fallback : 'style-loader',
+                use : ['css-loader', 'sass-loader']
+            })
+        },{
             test: /\.(jsx|js)?$/,
             exclude: /(node_modules)/,
-
             use : [{
                 loader : 'react-hot-loader'
             },{
@@ -16,6 +22,10 @@ module.exports = {
                     presets: ['react']
                 }
             }]
+        },{
+            test : /\.js$/,
+            exclude: /(node_modules)/,
+            loader: 'eslint-loader'
         }]
     },
     entry : {
@@ -23,17 +33,21 @@ module.exports = {
     },
     output : {
         filename : 'bundle.js',
-        path : path.resolve(__dirname, './app/dist')
+        path : path.resolve(__dirname, './app/dist'),
+        publicPath: path.resolve(__dirname, './app/dist')
     },
     resolve : {
         extensions : ['.js', '.jsx']
     },
     devServer : {
-        contentBase : [path.join(__dirname, 'app'), path.join(__dirname, 'dist')],
+        contentBase : ['app', 'dist'],
         hotOnly : true,
         watchContentBase : true,
         compress : true,
-        port : 9000
+        port : 8080,
+        watchOptions: {
+            poll: true
+        }
     },
     plugins: [
         new webpack.optimize.CommonsChunkPlugin({
@@ -41,5 +55,6 @@ module.exports = {
             filename: 'commons.js',
             minChunks: 2,
         }),
+        new ExtractTextPlugin('style.css')
   ],
 };

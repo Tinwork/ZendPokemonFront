@@ -1,13 +1,12 @@
-// import the dependencies 
-import Header from './components/common/header/header.jsx'
-import Footer from './components/common/footer/footer.jsx'
-import React from 'react'
-import ReactDOM from 'react-dom'
+// import the dependencies
+import React from 'react';
+import ReactDOM from 'react-dom';
+import Layout from './components/layout/component/layout';
+import './public/css/style.scss';
 
 ReactDOM.render(
   <div>
-    <Header />
-    <Footer />
+    <Layout />
   </div>,
-  document.getElementById('root')
+  document.getElementById('root'),
 );
