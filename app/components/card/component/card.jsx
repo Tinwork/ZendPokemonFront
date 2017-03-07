@@ -26,7 +26,12 @@ export default class Card extends React.Component {
         this.api._fetch('../../../data/pokemon.json','GET')
             .then(res => {
                 let pokemonList = res.region.pokemon.map((poke, idx) => {
-                    return poke
+                    return (
+                        <div key={idx}>
+                            <h2>{poke.name}</h2>
+                            <p>{poke.type}</p>
+                        </div>
+                    )
                 });
 
                 this.setState(prevState => ({
@@ -47,7 +52,7 @@ export default class Card extends React.Component {
     render() {
         return (
             <div className="card">
-                <p>{this.state.pokemonData}</p>
+                <div className="pokemonList">{this.state.pokemonData}</div>
             </div>
         )
     }
