@@ -1,7 +1,7 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import { react as React, ReactDOM } from './utils/utils';
 import App from './App';
-import './index.css';
+import '../public/css/style.scss';
+
 
 ReactDOM.render(
   <App />,

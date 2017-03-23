@@ -1,0 +1,39 @@
+body {
+  background-color: #5587A2;
+  font-family: 'Noto Sans', sans-serif;
+  color: white; }
+
+.navbar {
+  background-color: white;
+  width: 250px;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  transition: all 0.25s ease;
+  -webkit-transition: all 0.25s ease;
+  -moz-transition: all 0.25s ease; }
+  .navbar li {
+    padding: 15px 10px; }
+    .navbar li a {
+      color: #5587A2;
+      text-decoration: none;
+      list-style-type: none; }
+  .navbar.false {
+    right: 0; }
+  .navbar.true {
+    right: -250px; }
+
+i {
+  font-size: 30px !important;
+  position: absolute;
+  right: 50px;
+  transition: all 0.25s ease;
+  -webkit-transition: all 0.25s ease;
+  -moz-transition: all 0.25s ease; }
+  i.true {
+    right: 50px; }
+  i.false {
+    right: 260px; }
+
+.pokemonList {
+  display: flex; }
