@@ -3,23 +3,6 @@ import ReactDOM from 'react-dom';
 import fetchHandler from './fetch';
 
 // Define the properties of the menu
-const menuContent = Object.assign(Object.create({}), {
-  content: [{
-    name: 'Home',
-    link: '/',
-  }, {
-    name: 'Pokedex',
-    link: '/pokedex',
-  }, {
-    name: 'Admin',
-    link: '/admin',
-  }, {
-    name: 'Localise',
-    link: '/localise',
-  }],
-  footerMenu: '',
-});
-
 /**
  * Bootloader
  *          Load and start every function and dependencies that need to be start for the website
@@ -72,4 +55,4 @@ const utils = (() => {
   };
 })();
 
-export { utils, APIFacade, react, menuContent, ReactDOM };
+export { utils, APIFacade, react, ReactDOM };

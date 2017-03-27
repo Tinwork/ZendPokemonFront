@@ -87,9 +87,8 @@ const fetchHandler = (() => {
                return Promise.resolve(paramsToReturn);
              })
              .catch(err => {
-               console.log(err);
                return Promise.reject(err);
-              });
+             });
   };
 
 

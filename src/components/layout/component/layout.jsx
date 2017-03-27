@@ -1,5 +1,13 @@
-import { utils as _, react as React, menuContent} from '../../../utils/utils';
+import { utils as _, react as React} from '../../../utils/utils';
+import { menuContent } from '../data/menu';
 import Card from '../../card/component/card';
+
+// import the router 
+import {
+    BrowserRouter as Router,
+    Route,
+    Link
+} from 'react-router-dom';
 
 export default class Layout extends React.Component {
     /**
@@ -31,11 +39,24 @@ export default class Layout extends React.Component {
     navBarContent() {
         let content = menuContent.content.map((data, idx) => {
             return (
-                <li key={idx}><a href='{data.link}' key={idx}>{data.name}</a></li>
+                <li key={idx}><Link to={data.link}>{data.name}</Link></li>
             )
         })
 
         return content 
+    }
+
+    /**
+     * MakeRouter
+     */
+    makeRouter(){
+        let route = menuContent.content.map((data, idx) => {
+            return (
+                <Route path="{data.link}" key={idx} handler={data.componentFunc}/>
+            )
+        })
+
+        return route 
     }
     /**
      * Nav Bar 
@@ -43,11 +64,16 @@ export default class Layout extends React.Component {
      */
     navBar() {
         let content = this.navBarContent()
-        console.log(this.state.isSideBarClose)
+        let routeData = this.makeRouter()
         return (
             <div className={`navbar ${this.state.isSideBarClose}`}>
                 <div>
-                    {content}
+                    <Router>
+                        <div>
+                            {content}
+                            {routeData}
+                        </div>
+                    </Router>
                 </div>
             </div>
         )
