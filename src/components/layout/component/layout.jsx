@@ -1,6 +1,7 @@
 import { utils as _, react as React} from '../../../utils/utils';
 import { menuContent } from '../data/menu';
 import Card from '../../card/component/card';
+import Map from '../../map/component/map'
 
 // import the router 
 import {
@@ -86,6 +87,9 @@ export default class Layout extends React.Component {
         let navbar = this.navBar()
         return (
             <div>
+                <Map>
+
+                </Map>
                 <i className={`fa fa-bars ${this.state.isSideBarClose}`} aria-hidden="true" onClick={this.handleToggle}></i>
                 {navbar}
                 <Card />
