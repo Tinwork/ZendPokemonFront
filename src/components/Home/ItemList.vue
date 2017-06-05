@@ -2,31 +2,10 @@
   <div class="item-list">
     <div class="item-list-container">
       <div class="item-list-content">
-        <div class="item">
-          <img src="asqdsdq" alt="">
-          <h3>Title</h3>
+        <div class="item" v-for="pokemon in pokemons" @click="setPokemonShow(pokemon.rank)">
+          <img src="pokemon.src" alt="">
+          <h3>{{pokemon.name}}</h3>
         </div>
-        <div class="item">
-          <img src="asqdsdq" alt="">
-          <h3>Title</h3>
-        </div>
-        <div class="item">
-          <img src="asqdsdq" alt="">
-          <h3>Title</h3>
-        </div>
-        <div class="item">
-          <img src="asqdsdq" alt="">
-          <h3>Title</h3>
-        </div>
-        <div class="item">
-          <img src="asqdsdq" alt="">
-          <h3>Title</h3>
-        </div>
-        <div class="item">
-          <img src="asqdsdq" alt="">
-          <h3>Title</h3>
-        </div>
-
       </div>
     </div>
   </div>
@@ -34,7 +13,17 @@
 
 <script>
 export default {
-  name: 'item-list'
+  name: 'item-list',
+  computed: {
+    pokemons: function () {
+      return this.$store.getters.pokemons
+    }
+  },
+  methods: {
+    setPokemonShow: function (rank) {
+      this.$store.commit('setPokemonShowWithRank', rank)
+    }
+  }
 }
 </script>
 

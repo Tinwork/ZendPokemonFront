@@ -19,7 +19,8 @@ export default {
     //   debugger
     // }).catch( console.error)
     let array = [
-      {"id":"16","name":"Salamèche","rank":"4","type_id":"24"}
+      {"id":"16","name":"Salamèche","rank":"4","type_id":"24"},
+      {"id":"17","name":"Salamèchqsdqsdsqe","rank":"47","type_id":"24"}
     ]
     this.$store.commit('setPokemons', array)
     this.$store.commit('setPokemonshowWithIndex', 0)

@@ -10,16 +10,16 @@ const state = {
 }
 
 const mutations = {
-  setPokemonShowWithId: function (state, id) {
+  setPokemonShowWithRank: function (state, rank) {
     let i
     let tmp = state.pokemons.filter((pokemon, index) => {
-      if (pokemon.id === id) {
+      if (pokemon.rank === rank) {
         i = index
         return pokemon
       }
     })
     tmp.index = i
-    state.pokemonShow = tmp
+    state.pokemonShow = tmp[0]
   },
   setPokemonshowWithIndex: function (state, index) {
     state.pokemonShow = state.pokemons[index]

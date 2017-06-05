@@ -37,10 +37,21 @@ export default {
   name: 'item-show',
   methods: {
     nextPokemon: function () {
-      this.$store.commit('setPokemonshowWithIndex', this.$store.state.pokemonShow.index + 1)
+      let index = this.$store.state.pokemonShow.index + 1
+      if (this.$store.getters.pokemons[index]) {
+        this.$store.commit('setPokemonshowWithIndex', index)
+      } else {
+        this.$store.commit('setPokemonshowWithIndex',  0)
+      }
     },
     prevPokemon: function () {
-      this.$store.commit('setPokemonshowWithIndex', this.$store.state.pokemonShow.index - 1)
+      let index = this.$store.state.pokemonShow.index - 1
+      if (this.$store.getters.pokemons[index]) {
+        this.$store.commit('setPokemonshowWithIndex', index)
+      } else {
+        this.$store.commit('setPokemonshowWithIndex', this.$store.getters.pokemons.length - 1)
+      }
+      
     },
     localize: function () {
       this.$store.commit('setPokemonMap', this.pokemon)
