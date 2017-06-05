@@ -70,6 +70,12 @@ const mutations = {
 const getters = {
   pokemonMap: state => {
     return state.pokemonMap
+  },
+  pokemonShow: state => {
+    return state.pokemonShow
+  },
+  pokemons: state => {
+    return state.pokemons
   }
 }
 

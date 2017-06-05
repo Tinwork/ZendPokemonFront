@@ -2,17 +2,17 @@
   <div class="item-filter">
     <div class="item-filter-container">
       <div class="filter-container">
-        <div class="filter">
-          Filter 1
+        <div class="filter" @click="filterBy('id', 'more')">
+          Filtrer par ID asc
         </div>
-        <div class="filter">
-          Filter 2
+        <div class="filter" @click="filterBy('id', 'less')">
+          Filtrer par ID desc
         </div>
-        <div class="filter">
-          Filter 3
+        <div class="filter" @click="filterBy('name', 'asc')">
+          Filtrer par nom asc
         </div>
-        <div class="filter">
-          Filter 4
+        <div class="filter" @click="filterBy('name', 'desc')">
+          Filter par nom desc
         </div>
       </div>
     </div>
@@ -21,7 +21,16 @@
 
 <script>
 export default {
-  name: 'item-filter'
+  name: 'item-filter',
+  methods: {
+    filterBy: function (action, comparaison) {
+      if (action === 'id') {
+        this.$store.commit('filterById', comparaison)
+      } else if (action === 'desc') {
+        this.$store.commit('filterByName', comparaison)
+      }
+    }
+  }
 }
 </script>
 

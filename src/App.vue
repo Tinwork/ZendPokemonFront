@@ -12,6 +12,17 @@ export default {
   name: 'app',
   components: {
     MenuComponent
+  },
+  mounted: function () {
+    // debugger
+    // this.$http.get('http://52.48.251.229/api/pokemons').then(response => {
+    //   debugger
+    // }).catch( console.error)
+    let array = [
+      {"id":"16","name":"Salamèche","rank":"4","type_id":"24"}
+    ]
+    this.$store.commit('setPokemons', array)
+    this.$store.commit('setPokemonshowWithIndex', 0)
   }
 }
 </script>
