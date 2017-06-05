@@ -3,16 +3,16 @@
     <h1 class="map-title">Map</h1>
     <div class="map-content"></div>
     <div class="map-form">
-      <select name="" id="">
-        <option value="Pokemon">POkemon</option>
+      <select v-model="selectedPokemon">
+        <option value="Pokemon">Pokemon</option>
       </select>
 
       <div class="input">
-        <label for="">Longitude</label>
+        <label>Longitude</label>
         <input type="text" v-model="longitude">
       </div>
       <div class="input">
-        <label for="">Latitude</label>
+        <label>Latitude</label>
         <input type="text" v-model="latitude">
       </div>
 
@@ -61,14 +61,16 @@ export default {
       })
     },
     addNewPokemon: function () {
-      let newPokemon = {
-        coordinate: [this.longitude, this.latitude],
-        src: 'http://www.pokepedia.fr/images/7/72/Miniat_6_x_001.png'
-      }
+      if (this.longitude && this.latitude){
+        let newPokemon = {
+          coordinate: [this.longitude, this.latitude],
+          src: 'http://www.pokepedia.fr/images/7/72/Miniat_6_x_001.png'
+        }
 
-      this.addPokemon(newPokemon)
-      this.latitude = ''
-      this.longitude = ''
+        this.addPokemon(newPokemon)
+        this.latitude = null
+        this.longitude = null
+      }
     },
     initPokemon: function () {
       this.pokemons = [
