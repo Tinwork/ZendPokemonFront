@@ -96,4 +96,10 @@ export default {
     text-decoration: none;
 }
 
+@media screen and (max-width: 700px) {
+  .menu-open {
+    width: 100vw;
+  }
+}
+
 </style>

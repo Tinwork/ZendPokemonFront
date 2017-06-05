@@ -4,29 +4,30 @@
       <h1>Item List</h1>
       <div class="item-list-content">
         <div class="item">
-          Filter 1
+          <img src="asqdsdq" alt="">
+          <h3>Title</h3>
         </div>
         <div class="item">
-          Filter 2
+          <img src="asqdsdq" alt="">
+          <h3>Title</h3>
         </div>
         <div class="item">
-          Filter 3
+          <img src="asqdsdq" alt="">
+          <h3>Title</h3>
         </div>
         <div class="item">
-          Filter 4
+          <img src="asqdsdq" alt="">
+          <h3>Title</h3>
         </div>
         <div class="item">
-          Filter 1
+          <img src="asqdsdq" alt="">
+          <h3>Title</h3>
         </div>
         <div class="item">
-          Filter 2
+          <img src="asqdsdq" alt="">
+          <h3>Title</h3>
         </div>
-        <div class="item">
-          Filter 3
-        </div>
-        <div class="item">
-          Filter 4
-        </div>
+
       </div>
     </div>
   </div>
@@ -40,18 +41,36 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.item-list {
+  margin: 0 0 50px 0;
+}
 .item-list-container {
   margin: auto;
   max-width: 1500px;
 }
 
+.item-list-content {
+  overflow: auto;
+  clear: both;
+}
+
 .item {
   width: 22%;
-  min-height: 100px;
+  min-height: 200px;
   background: gray;
   margin: 0px 4% 4% 0;
   float: left;
   text-align: center;
+}
+
+.item img {
+  min-height: 150px;
+}
+
+.item h3 {
+  text-align: center;
+  min-height: 50px;
+  margin: 2px 5px;
 }
 
 .item:nth-child(4n) {
@@ -61,6 +80,25 @@ export default {
 @media screen and (max-width: 1350px) {
   .item-list-container {
     max-width: calc(100% - 220px);
+  }
+
+  .item {
+    width: 48%;
+    margin: 0 4% 4% 0;
+  }
+
+  .item:nth-child(4n) {
+    margin: inherit;
+  }
+
+  .item:nth-child(2n) {
+    margin: 0 0 4% 0;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .item-list-container {
+    max-width: calc(100% - 40px);
   }
 }
 </style>
