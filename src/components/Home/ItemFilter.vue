@@ -1,7 +1,6 @@
 <template>
   <div class="item-filter">
     <div class="item-filter-container">
-      <h1>Item Filter</h1>
       <div class="filter-container">
         <div class="filter">
           Filter 1
@@ -47,6 +46,7 @@ export default {
   padding: 10px;
   box-sizing: border-box;
   background: grey;
+  cursor: pointer;
 }
 
 .filter:nth-child(4n) {

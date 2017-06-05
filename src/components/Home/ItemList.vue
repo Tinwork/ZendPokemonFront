@@ -1,7 +1,6 @@
 <template>
   <div class="item-list">
     <div class="item-list-container">
-      <h1>Item List</h1>
       <div class="item-list-content">
         <div class="item">
           <img src="asqdsdq" alt="">
@@ -85,6 +84,7 @@ export default {
   .item {
     width: 48%;
     margin: 0 4% 4% 0;
+    cursor: pointer;
   }
 
   .item:nth-child(4n) {

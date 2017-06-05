@@ -1,11 +1,11 @@
 <template>
   <div class="menu">
     <div class="home-button">
-      <router-link to="home">Home</router-link>
+      <router-link to="home" class="fa fa-home"></router-link>
     </div>
-    <div class="open-menu" @click="toggleMenu">Menu</div>
+    <div class="open-menu fa fa-bars" @click="toggleMenu"></div>
     <div class="menu-open" v-if="displayMenu">
-      <div class="close-menu" @click="toggleMenu">X</div>
+      <div class="close-menu fa fa-close" @click="toggleMenu"></div>
 
       <div class="menu-list">
         <h3>Menu</h3>
@@ -45,17 +45,23 @@ export default {
 .open-menu,
 .home-button {
   position: absolute;
-  
   top: 20px;
   width: 50px;
   height: 50px;
   border: 1px solid;
   text-align: center;
   line-height: 50px;
+  cursor: pointer;
 }
 
 .home-button {
   left: 30px;
+}
+
+.open-menu,
+.home-button a {
+  text-decoration: none;
+  color: black;
 }
 
 .open-menu {

@@ -1,7 +1,7 @@
 <template>
   <div class="item-show">
-    <a class="navigation left">Left</a>
-    <a class="navigation right">Right</a>
+    <a class="navigation left fa fa-angle-left"></a>
+    <a class="navigation right fa fa-angle-right"></a>
     <div class="item-show-container">
       <h1>Title</h1>
       <div class="item-show-content">
@@ -68,6 +68,8 @@ export default {
   width: 50px;
   text-align: center;
   line-height: 50px;
+  font-size: 30px;
+  cursor: pointer;
 }
 
 .navigation.left {
