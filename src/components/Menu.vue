@@ -39,7 +39,7 @@ export default {
 
 .menu {
   position: relative;
-  // height: 104px;
+  z-index: 2;
 }
 
 .open-menu,

@@ -1,8 +1,8 @@
 <template>
   <div class="home">
-    <ItemList></ItemList>
     <ItemShow></ItemShow>
     <ItemFilter></ItemFilter>
+    <ItemList></ItemList>
   </div>
 </template>
 
@@ -23,5 +23,6 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+
 
 </style>
