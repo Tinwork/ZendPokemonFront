@@ -1,7 +1,7 @@
 <template>
   <div class="item-show">
-    <a class="navigation left fa fa-angle-left"></a>
-    <a class="navigation right fa fa-angle-right"></a>
+    <a class="navigation left fa fa-angle-left" @click="prevPokemon"></a>
+    <a class="navigation right fa fa-angle-right" @click="nextPokemon"></a>
     <div class="item-show-container">
       <h1>Title</h1>
       <div class="item-show-content">
@@ -47,7 +47,15 @@
 
 <script>
 export default {
-  name: 'item-show'
+  name: 'item-show',
+  methods: {
+    nextPokemon: function () {
+      console.log(this)
+    },
+    prevPokemon: function () {
+      console.log(this)
+    }
+  }
 }
 </script>
 

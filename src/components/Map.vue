@@ -31,8 +31,12 @@ export default {
       map: '',
       pokemons: '',
       longitude: '',
-      latitude: '',
-      selectedPokemon: ''
+      latitude: ''
+    }
+  },
+  computed: {
+    selectedPokemon: function () {
+      return this.$store.getters.pokemonMap
     }
   },
   methods: {

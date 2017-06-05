@@ -30,7 +30,7 @@ export default {
 .item-filter {
   clear: both;
   overflow: auto;
-  margin: 20px 0;
+  margin: 40px 0 20px 0;
 }
 
 .item-filter-container {

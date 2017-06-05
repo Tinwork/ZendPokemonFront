@@ -51,7 +51,7 @@ export default {
   border: 1px solid;
   text-align: center;
   line-height: 50px;
-  cursor: pointer;
+  scursor: pointer;
 }
 
 .home-button {
@@ -66,6 +66,7 @@ export default {
 
 .open-menu {
   right: 30px;
+  cursor: pointer;
 }
 
 .menu-open {
