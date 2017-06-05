@@ -4,7 +4,9 @@
     <div class="map-content"></div>
     <div class="map-form">
       <select v-model="selectedPokemon">
-        <option value="Pokemon">Pokemon</option>
+        <option v-for="pokemon in pokemonsList" v-bind:value="pokemon.rank">
+          {{ pokemon.name }}
+        </option>
       </select>
 
       <div class="input">
@@ -29,15 +31,20 @@ export default {
   data: function () {
     return {
       map: '',
-      pokemons: '',
       longitude: '',
-      latitude: ''
+      latitude: '',
+      pokemons: ''
     }
   },
   computed: {
     selectedPokemon: function () {
-      return this.$store.getters.pokemonMap
-    }
+      console.log(this.$store.getters.pokemonMap.name)
+      return this.$store.getters.pokemonMap.rank
+    },
+    pokemonsList : function () {
+      console.log(this.$store.getters.pokemonMap)
+      return this.$store.getters.pokemons
+    },
   },
   methods: {
     initMap: function () {

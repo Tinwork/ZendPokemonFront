@@ -3,29 +3,16 @@
     <a class="navigation left fa fa-angle-left" @click="prevPokemon"></a>
     <a class="navigation right fa fa-angle-right" @click="nextPokemon"></a>
     <div class="item-show-container">
-      <h1>Title</h1>
+      <h1>{{pokemon.name}}</h1>
       <div class="item-show-content">
         <div class="item-show-content-left">
           <img src="qsdsqd">
         </div>
         <div class="item-show-content-right">
-          <div class="item-show-content-label">
-            <h3>Label</h3>
-            <p>
-              <strong>Label</strong>
-              Contenu ...
-            </p>
-            <p>
-              <strong>Label</strong>
-              Contenu ...
-            </p>
-            <p>
-              <strong>Label</strong>
-              Contenu ...
-            </p>
-          </div>
-          <div class="item-show-content-evolution">
+          Id: {{pokemon.rank}}
+          <div class="item-show-content-evolution" v-if="pokemon.evolution">
             <h3>Evolution</h3>
+            {{pokemon.evolution}}
             <a>
               <img src="qsdqsd" alt="">
             </a>
@@ -37,7 +24,7 @@
             </a>
           </div>
           <div class="item-show-content-localization">
-            <h3>Localiser ce pokemon</h3>
+            <h3 @click="localize">Localiser ce pokemon</h3>
           </div>
         </div>
       </div>
@@ -50,10 +37,19 @@ export default {
   name: 'item-show',
   methods: {
     nextPokemon: function () {
-      console.log(this)
+      this.$store.commit('setPokemonshowWithIndex', this.$store.state.pokemonShow.index + 1)
     },
     prevPokemon: function () {
-      console.log(this)
+      this.$store.commit('setPokemonshowWithIndex', this.$store.state.pokemonShow.index - 1)
+    },
+    localize: function () {
+      this.$store.commit('setPokemonMap', this.pokemon)
+      this.$router.push({ name: 'Map' })
+    }
+  },
+  computed: {
+    pokemon: function () {
+      return this.$store.getters.pokemonShow
     }
   }
 }
