@@ -1,7 +1,23 @@
 <template>
   <div class="map">
-    <h1>Map</h1>
+    <h1 class="map-title">Map</h1>
     <div class="map-content"></div>
+    <div class="map-form">
+      <select name="" id="">
+        <option value="Pokemon">POkemon</option>
+      </select>
+
+      <div class="input">
+        <label for="">Longitude</label>
+        <input type="text" v-model="longitude">
+      </div>
+      <div class="input">
+        <label for="">Latitude</label>
+        <input type="text" v-model="latitude">
+      </div>
+
+      <button @click="addNewPokemon">Envoyer</button>
+    </div>
   </div>
 </template>
 
@@ -13,7 +29,10 @@ export default {
   data: function () {
     return {
       map: '',
-      pokemons: ''
+      pokemons: '',
+      longitude: '',
+      latitude: '',
+      selectedPokemon: ''
     }
   },
   methods: {
@@ -35,6 +54,21 @@ export default {
           zoom: 3
         })
       });
+
+      this.map.on("click", event => {
+        this.longitude = event.coordinate[0]
+        this.latitude = event.coordinate[1]
+      })
+    },
+    addNewPokemon: function () {
+      let newPokemon = {
+        coordinate: [this.longitude, this.latitude],
+        src: 'http://www.pokepedia.fr/images/7/72/Miniat_6_x_001.png'
+      }
+
+      this.addPokemon(newPokemon)
+      this.latitude = ''
+      this.longitude = ''
     },
     initPokemon: function () {
       this.pokemons = [
@@ -72,6 +106,54 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.map-title {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 21px;
+  text-align: center;
+}
+
+.map-form {
+  position: absolute;
+  top: 16vh;
+  width: 350px;
+  min-height: 100px;
+  left: 11px;
+  box-sizing: border-box;
+  padding: 10px;
+  border: 1px solid;
+  background: white;
+}
+
+select {
+  width: 100%;
+  border: 1px solid;
+  background: white;
+}
+
+.input {
+  margin: 5px 0;
+}
+
+label {
+  width: 25%;
+  display: block;
+  float: left;
+  text-align: left;
+}
+
+input {
+  width: 73%;
+}
+
+button {
+  background: white;
+  border: 1px solid;
+  padding: 5px 10px;
+  float: right;
+}
+
 .map-content {
   width: 100vw;
   height: 85vh;
