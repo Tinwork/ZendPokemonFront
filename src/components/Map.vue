@@ -78,7 +78,7 @@ export default {
       if (this.longitude && this.latitude){
         let newPokemon = {
           coordinate: [this.longitude, this.latitude],
-          src: this.selectedPokemon.src
+          src: "http://52.48.251.229" + this.$store.getters.pokemonMap.thumbnail
         }
 
         this.addPokemon(newPokemon)

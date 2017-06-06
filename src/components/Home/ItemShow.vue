@@ -6,7 +6,7 @@
       <h1>{{pokemon.name}}</h1>
       <div class="item-show-content">
         <div class="item-show-content-left">
-          <img src="qsdsqd">
+          <img :src="src(pokemon)">
         </div>
         <div class="item-show-content-right">
           Id: {{pokemon.rank}}
@@ -56,6 +56,9 @@ export default {
     localize: function () {
       this.$store.commit('setPokemonMap', this.pokemon)
       this.$router.push({ name: 'Map' })
+    },
+    src: function (pokemon) {
+      return "http://52.48.251.229" + pokemon.thumbnail
     }
   },
   computed: {

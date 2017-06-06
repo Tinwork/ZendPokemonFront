@@ -3,7 +3,7 @@
     <div class="item-list-container">
       <div class="item-list-content">
         <div class="item" v-for="pokemon in pokemons" @click="setPokemonShow(pokemon.rank)">
-          <img :src="pokemon.src" alt="">
+          <img :src="src(pokemon)" alt="">
           <h3>{{pokemon.name}}</h3>
         </div>
       </div>
@@ -17,11 +17,15 @@ export default {
   computed: {
     pokemons: function () {
       return this.$store.getters.pokemons
-    }
+    },
+    
   },
   methods: {
     setPokemonShow: function (rank) {
       this.$store.commit('setPokemonShowWithRank', rank)
+    },
+    src: function (pokemon) {
+      return "http://52.48.251.229" + pokemon.thumbnail
     }
   }
 }
@@ -53,6 +57,7 @@ export default {
 
 .item img {
   min-height: 150px;
+  width: 100%;
 }
 
 .item h3 {
