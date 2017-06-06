@@ -1,7 +1,7 @@
 <template>
   <div class="menu">
     <div class="home-button">
-      <router-link to="home" class="fa fa-home"></router-link>
+      <router-link :to="{ name: 'Home' }" class="fa fa-home"></router-link>
     </div>
     <div class="open-menu fa fa-bars" @click="toggleMenu"></div>
     <div class="menu-open" v-if="displayMenu">
@@ -9,10 +9,10 @@
 
       <div class="menu-list">
         <h3>Menu</h3>
-        <router-link to="home" v-on:click.native="toggleMenu">Page d'accueil</router-link>
-        <router-link to="home" v-on:click.native="toggleMenu">Pokemons</router-link>
-        <router-link to="map" v-on:click.native="toggleMenu">Localiser un pokemon</router-link>
-        <router-link to="admin" v-on:click.native="toggleMenu">Admininstrateur</router-link>
+        <router-link :to="{ name: 'Home' }" v-on:click.native="toggleMenu">Page d'accueil</router-link>
+        <router-link :to="{ name: 'Home' }" v-on:click.native="toggleMenu">Pokemons</router-link>
+        <router-link :to="{ name: 'Map' }" v-on:click.native="toggleMenu">Localiser un pokemon</router-link>
+        <router-link :to="{ name: 'Admin' }" v-on:click.native="toggleMenu">Admininstrateur</router-link>
       </div>
     </div>
   </div>

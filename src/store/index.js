@@ -1,12 +1,14 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import uuid from 'node-uuid'
 
 Vue.use(Vuex)
 
 const state = {
   pokemonShow: {},
   pokemonMap: {},
-  pokemons: []
+  pokemons: [],
+  alerts: []
 }
 
 const mutations = {
@@ -64,6 +66,20 @@ const mutations = {
         break
     }
     state.pokemons = tmp
+  },
+  addAlert: function (state, { content, className }) {
+    const alert = {
+      className,
+      content,
+      id: uuid.v4()
+    }
+    state.alerts.push(alert)
+    setTimeout(() => {
+      mutations.deleteAlert(state, alert)
+    }, 3500)
+  },
+  deleteAlert: function (state, alertToRemove) {
+    state.alerts = state.alerts.filter(alert => alert.id !== alertToRemove.id)
   }
 }
 
@@ -76,6 +92,15 @@ const getters = {
   },
   pokemons: state => {
     return state.pokemons
+  },
+  login: state => {
+    return 'login'
+  },
+  password: state => {
+    return 'password'
+  },
+  alerts: state => {
+    return state.alerts
   }
 }
 

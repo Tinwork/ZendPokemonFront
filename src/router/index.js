@@ -38,12 +38,12 @@ export default new Router({
           component: Map
         }
       ]
+    },
+    {
+      path: '*',
+      redirect: {
+        name: 'Home'
+      }
     }
-    // {
-    //   path: '*',
-    //   redirect: {
-    //     name: 'Home'
-    //   }
-    // }
   ]
 })

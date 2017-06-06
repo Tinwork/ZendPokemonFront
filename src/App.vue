@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <AlertManager></AlertManager>
     <MenuComponent></MenuComponent>
     <router-view></router-view>
   </div>
@@ -7,11 +8,13 @@
 
 <script>
 import MenuComponent from '@/components/Menu'
+import AlertManager from '@/components/AlertManager'
 
 export default {
   name: 'app',
   components: {
-    MenuComponent
+    MenuComponent,
+    AlertManager
   },
   mounted: function () {
     this.$http.get('http://52.48.251.229/api/pokemons').then(response => {
