@@ -11,6 +11,9 @@ module.exports = {
   entry: {
     app: './src/main.js'
   },
+  externals: {
+    sharp: 'sharp' // also tried: sharp: 'Sharp' | Sharp: 'sharp' | Sharp: 'Sharp'
+  },
   output: {
     path: config.build.assetsRoot,
     filename: '[name].js',
@@ -21,7 +24,7 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.vue', '.json'],
     alias: {
-      'vue$': 'vue/dist/vue.esm.js',
+      vue$: 'vue/dist/vue.esm.js',
       '@': resolve('src')
     }
   },
