@@ -3,7 +3,7 @@
     <div class="item-list-container">
       <div class="item-list-content">
         <div class="item" v-for="pokemon in pokemons" @click="setPokemonShow(pokemon.rank)">
-          <img src="pokemon.src" alt="">
+          <img :src="pokemon.src" alt="">
           <h3>{{pokemon.name}}</h3>
         </div>
       </div>

@@ -3,8 +3,8 @@
     <h1 class="map-title">Map</h1>
     <div class="map-content"></div>
     <div class="map-form">
-      <select v-model="selectedPokemon">
-        <option v-for="pokemon in pokemonsList" v-bind:value="pokemon.rank">
+      <select v-model="selectedPokemon" @change="changeSelectedPokemon($event)">
+        <option v-for="pokemon in pokemonsList" v-bind:value="pokemon.id">
           {{ pokemon.name }}
         </option>
       </select>
@@ -18,7 +18,7 @@
         <input type="text" v-model="latitude">
       </div>
 
-      <button @click="addNewPokemon">Envoyer</button>
+      <button @click="addNewPokemon" :disabled="!selectedPokemon || !latitude || !longitude">Envoyer</button>
     </div>
   </div>
 </template>
@@ -33,16 +33,14 @@ export default {
       map: '',
       longitude: '',
       latitude: '',
-      pokemons: ''
+      pokemonsIcons: ''
     }
   },
   computed: {
     selectedPokemon: function () {
-      console.log(this.$store.getters.pokemonMap.name)
-      return this.$store.getters.pokemonMap.rank
+      return this.$store.getters.pokemonMap.id
     },
     pokemonsList : function () {
-      console.log(this.$store.getters.pokemonMap)
       return this.$store.getters.pokemons
     },
   },
@@ -71,11 +69,16 @@ export default {
         this.latitude = event.coordinate[1]
       })
     },
+    changeSelectedPokemon: function (event) {
+      let pokemon = this.pokemonsList.find(pokemon => pokemon.id === event.target.value)
+      this.selectedPokemon = pokemon
+      this.$store.commit('setPokemonMap', pokemon)
+    },
     addNewPokemon: function () {
       if (this.longitude && this.latitude){
         let newPokemon = {
           coordinate: [this.longitude, this.latitude],
-          src: 'http://www.pokepedia.fr/images/7/72/Miniat_6_x_001.png'
+          src: this.selectedPokemon.src
         }
 
         this.addPokemon(newPokemon)
@@ -84,14 +87,14 @@ export default {
       }
     },
     initPokemon: function () {
-      this.pokemons = [
+      this.pokemonsIcons = [
         { 
           coordinate:  [-3737464.9350319784, 2798206.731463732], 
           src: 'http://www.pokepedia.fr/images/7/72/Miniat_6_x_001.png' 
         }
       ]
 
-      for (let pokemon of this.pokemons) {
+      for (let pokemon of this.pokemonsIcons) {
         this.addPokemon(pokemon)
       }
     },
@@ -103,7 +106,7 @@ export default {
       iconFeature.setStyle(
         new ol.style.Style({
           image: new ol.style.Icon ({
-            src: pokemon.src
+            src: pokemon.src || 'http://www.pokepedia.fr/images/7/72/Miniat_6_x_001.png'
           })
         })
       );
