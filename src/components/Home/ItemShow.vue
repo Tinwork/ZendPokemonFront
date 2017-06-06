@@ -10,18 +10,23 @@
         </div>
         <div class="item-show-content-right">
           Id: {{pokemon.rank}}
-          <div class="item-show-content-evolution" v-if="pokemon.evolution">
-            <h3>Evolution</h3>
-            {{pokemon.evolution}}
-            <a>
-              <img src="qsdqsd" alt="">
-            </a>
-            <a>
-              <img src="qsdqsd" alt="">
-            </a>
-            <a>
-              <img src="qsdqsd" alt="">
-            </a>
+          <div class="item-show-content-evolution" v-if="pokemon.evolutions">
+            <h3>Evolutions</h3>
+            
+            <div v-if="pokemon.evolutions.sub_evolution">
+              <div v-for="evolution in pokemon.evolutions.sub_evolution" v-if="evolution[0]">
+                <h4>Subevolution</h4>
+                 <a @click="setPokemonShow(evolution[0])">{{evolution[0].name}}</a>
+              </div>
+            </div>
+
+            <div v-if="pokemon.evolutions.post_evolution">
+              <div v-for="evolution in pokemon.evolutions.post_evolution" v-if="evolution[0]">
+                <h4>Postevolution</h4>
+                <a @click="setPokemonShow(evolution[0])">{{evolution[0].name}}</a>
+              </div>
+            </div>
+
           </div>
           <div class="item-show-content-localization">
             <h3 @click="localize">Localiser ce pokemon</h3>
@@ -59,6 +64,9 @@ export default {
     },
     src: function (pokemon) {
       return "http://52.48.251.229" + pokemon.thumbnail
+    },
+    setPokemonShow: function (pokemon) {
+      this.$store.commit('setPokemonShowWithRank', pokemon.rank)
     }
   },
   computed: {
