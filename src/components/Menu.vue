@@ -12,7 +12,7 @@
         <router-link to="home" v-on:click.native="toggleMenu">Page d'accueil</router-link>
         <router-link to="home" v-on:click.native="toggleMenu">Pokemons</router-link>
         <router-link to="map" v-on:click.native="toggleMenu">Localiser un pokemon</router-link>
-        <a v-on:click.native="toggleMenu">Admininstrateur</a>
+        <router-link to="admin" v-on:click.native="toggleMenu">Admininstrateur</router-link>
       </div>
     </div>
   </div>
