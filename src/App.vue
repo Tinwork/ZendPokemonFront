@@ -16,15 +16,22 @@ export default {
     MenuComponent,
     AlertManager
   },
+  methods: {
+    getPokemons: function () {
+      this.$http.get(window.API + '/api/pokemons').then(response => {
+        this.$store.commit('setPokemons', response.data.collection.response.pokemons)
+        this.$store.commit('setPokemonshowWithIndex', 0)
+      }).catch( console.error)
+    },
+    getTypes: function () {
+      this.$http.get(window.API + '/api/types').then(response => {
+        this.$store.commit('setTypes', response.data.collection.response.types)
+      }).catch( console.error)
+    }
+  },
   mounted: function () {
-    this.$http.get(window.API + '/api/pokemons').then(response => {
-      this.$store.commit('setPokemons', response.data.collection.response.pokemons)
-      this.$store.commit('setPokemonshowWithIndex', 0)
-    }).catch( console.error)
-    this.$http.get(window.API + '/api/types').then(response => {
-      this.$store.commit('setTypes', response.data.collection.response.types)
-    }).catch( console.error)
-    
+    this.getPokemons()
+    this.getTypes()
   }
 }
 </script>

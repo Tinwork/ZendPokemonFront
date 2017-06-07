@@ -5,7 +5,7 @@ import App from './App'
 import router from './router'
 import store from './store'
 
-window.API = 'http://52.48.251.229'
+window.API = 'http://34.249.51.77'
 Vue.http.options.emulateJSON = true
 
 /* eslint-disable no-new */
