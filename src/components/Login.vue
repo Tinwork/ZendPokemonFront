@@ -35,9 +35,9 @@ export default {
       formData.append('password', this.password);
       this.$http.post(window.API + '/admin/oauth', formData)
       .then(response => {
-        this.$store.commit('setToken', response.data.response.token)
+        this.$root.setToken(response.data.response.token)
         this.$store.commit('addAlert', { className: 'success', content: 'Vous avez bien été connecter' })
-        // this.$router.go({ name: 'Admin'})
+        this.$router.push({ name: 'Admin'})
       }).catch(error => {
         this.$store.commit('addAlert', { className: 'danger', content: 'Veuillez vérifier vos identifients' })
         console.error(error)

@@ -14,5 +14,28 @@ new Vue({
   router,
   store,
   template: '<App/>',
-  components: { App }
+  components: { App },
+  methods: {
+    compareTime: function (was) {
+      return new Date() - was < 3600000
+    },
+    getToken: function () {
+      const token = JSON.parse(window.localStorage.getItem('token'))
+      if (token) {
+        const datestring = token.timestamp
+        if (this.compareTime(datestring)) {
+          return token
+        } else {
+          window.localStorage.removeItem('token')
+          router.push({ name: 'Login' })
+        }
+      } else {
+        router.push({ name: 'Login' })
+      }
+    },
+    setToken: function (token) {
+      const object = { value: 'value', timestamp: new Date().getTime() }
+      window.localStorage.setItem('token', JSON.stringify(object))
+    }
+  }
 })
