@@ -30,11 +30,10 @@ export default new Router({
     {
       path: '/admin',
       name: 'Admin',
-      redirect: '/admin/a',
       component: Admin,
-      components: [
+      children: [
         {
-          path: 'a',
+          path: 'dashboard',
           component: Map
         }
       ]
