@@ -5,6 +5,7 @@ import Home from '@/components/Home'
 import Map from '@/components/Map'
 import Admin from '@/components/Admin'
 import Login from '@/components/Login'
+import Dashboard from '@/components/Admin/Dashboard'
 
 Vue.use(Ressource)
 Vue.use(Router)
@@ -30,11 +31,13 @@ export default new Router({
     {
       path: '/admin',
       name: 'Admin',
+      redirect: '/admin/dashboard',
       component: Admin,
       children: [
         {
           path: 'dashboard',
-          component: Map
+          name: 'Dashboard',
+          component: Dashboard
         }
       ]
     },
