@@ -8,7 +8,9 @@ const state = {
   pokemonShow: {},
   pokemonMap: {},
   pokemons: [],
-  alerts: []
+  alerts: [],
+  types: [],
+  token: undefined
 }
 
 const mutations = {
@@ -80,6 +82,12 @@ const mutations = {
   },
   deleteAlert: function (state, alertToRemove) {
     state.alerts = state.alerts.filter(alert => alert.id !== alertToRemove.id)
+  },
+  setToken: function (state, token) {
+    state.token = token
+  },
+  setTypes: function (state, array) {
+    state.types = array
   }
 }
 
@@ -93,14 +101,11 @@ const getters = {
   pokemons: state => {
     return state.pokemons
   },
-  login: state => {
-    return 'login'
-  },
-  password: state => {
-    return 'password'
-  },
   alerts: state => {
     return state.alerts
+  },
+  types: state => {
+    return state.types
   }
 }
 

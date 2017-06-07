@@ -17,9 +17,12 @@ export default {
     AlertManager
   },
   mounted: function () {
-    this.$http.get('http://52.48.251.229/api/pokemons').then(response => {
+    this.$http.get(window.API + '/api/pokemons').then(response => {
       this.$store.commit('setPokemons', response.data.collection.response.pokemons)
       this.$store.commit('setPokemonshowWithIndex', 0)
+    }).catch( console.error)
+    this.$http.get(window.API + '/api/types').then(response => {
+      this.$store.commit('setTypes', response.data.collection.response.types)
     }).catch( console.error)
     
   }

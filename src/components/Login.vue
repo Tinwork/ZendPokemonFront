@@ -9,7 +9,7 @@
 
     <div>
       <label for="password">Password</label>
-      <input type="text" name="password" v-model="password">
+      <input type="password" name="password" v-model="password">
     </div>
 
     <button @click="validateInput">Valider</button>
@@ -24,19 +24,24 @@ export default {
   name: 'login',
   data: function () {
     return {
-      login: '',
-      password: ''
+      login: 'did',
+      password: 'root'
     }
   },
   methods: {
     validateInput: function () {
-      if (this.login === this.$store.getters.login &&
-          this.password === this.$store.getters.password) {
+      let formData = new FormData();
+      formData.append('username', this.login);
+      formData.append('password', this.password);
+      this.$http.post(window.API + '/admin/oauth', formData)
+      .then(response => {
+        this.$store.commit('setToken', response.data.response.token)
         this.$store.commit('addAlert', { className: 'success', content: 'Vous avez bien été connecter' })
-        this.$router.go({ name: 'Admin'})
-      } else {
+        // this.$router.go({ name: 'Admin'})
+      }).catch(error => {
         this.$store.commit('addAlert', { className: 'danger', content: 'Veuillez vérifier vos identifients' })
-      }
+        console.error(error)
+      })
     }
   }
 }

@@ -5,18 +5,11 @@ import App from './App'
 import router from './router'
 import store from './store'
 
-// Vue.config.productionTip = false
-// Vue.http.options.xhr = { withCredentials: true }
-// Vue.http.options.credentials = true
-// Vue.http.options.emulateJSON = true
-
-// Vue.http.interceptors.push((request, next) => {
-//   request.credentials = true
-//   next()
-// })
+window.API = 'http://52.48.251.229'
+Vue.http.options.emulateJSON = true
 
 /* eslint-disable no-new */
-window.vue = new Vue({
+new Vue({
   el: '#app',
   router,
   store,

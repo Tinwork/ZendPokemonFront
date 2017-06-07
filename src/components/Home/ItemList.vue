@@ -25,7 +25,7 @@ export default {
       this.$store.commit('setPokemonShowWithRank', rank)
     },
     src: function (pokemon) {
-      return "http://52.48.251.229" + pokemon.thumbnail
+      return window.API + pokemon.thumbnail
     }
   }
 }
