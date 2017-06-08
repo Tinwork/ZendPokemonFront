@@ -7,14 +7,15 @@
 
 <script>
 import MenuAdmin from './Admin/MenuAdmin'
-console.log(MenuAdmin)
+
 export default {
   name: 'admin',
-  component: {
+  components: {
     MenuAdmin
   }
 }
 </script>
+
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
