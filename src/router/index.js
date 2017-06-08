@@ -6,6 +6,8 @@ import Map from '@/components/Map'
 import Admin from '@/components/Admin'
 import Login from '@/components/Login'
 import Dashboard from '@/components/Admin/Dashboard'
+import PokemonsAdmin from '@/components/Admin/Pokemons'
+import TypesAdmin from '@/components/Admin/Types'
 
 Vue.use(Ressource)
 Vue.use(Router)
@@ -38,6 +40,16 @@ export default new Router({
           path: 'dashboard',
           name: 'Dashboard',
           component: Dashboard
+        },
+        {
+          path: 'pokemons',
+          name: 'Pokemons',
+          component: PokemonsAdmin
+        },
+        {
+          path: 'types',
+          name: 'Types',
+          component: TypesAdmin
         }
       ]
     },
