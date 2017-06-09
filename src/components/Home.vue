@@ -23,6 +23,9 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
+.home {
+  max-width: calc(100vw - 80px);
+  margin-left: 80px;
+}
 
 </style>

@@ -2,6 +2,15 @@
   <div class="item-show">
     <a class="navigation left fa fa-angle-left" @click="prevPokemon"></a>
     <a class="navigation right fa fa-angle-right" @click="nextPokemon"></a>
+
+    <div class="new-item">
+      <h1>{{pokemon.name}}<span>, Rank : {{pokemon.rank}}</span></h1>
+      <div class="types">
+        <div class="type" v-for="t in pokemon.type">{{ t.label }}</div>
+      </div>
+      <img :src="src(pokemon)">
+    </div>
+
     <div class="item-show-container">
       <h1>{{pokemon.name}}</h1>
       <div class="item-show-content">
@@ -79,10 +88,17 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+
+h1 span {
+  font-size: 0.7em;
+  color: gray;
+}
+
 .item-show {
   position: relative;
   overflow: auto;
   border-bottom: 3px solid;
+  min-height: 100vh;
 }
 
 .navigation {

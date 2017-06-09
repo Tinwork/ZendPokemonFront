@@ -1,12 +1,7 @@
 <template>
   <div class="menu">
-    <div class="home-button">
-      <router-link :to="{ name: 'Home' }" class="fa fa-home"></router-link>
-    </div>
-    <div class="open-menu fa fa-bars" @click="toggleMenu"></div>
-    <div class="menu-open" v-if="displayMenu">
-      <div class="close-menu fa fa-close" @click="toggleMenu"></div>
-
+    <div :class="['open-menu fa', displayMenu ? 'fa-close' : 'fa-bars']" @click="toggleMenu"></div>
+    <div :class="['menu-open', displayMenu ? 'isOpen' : '']">
       <div class="menu-list">
         <h3>Menu</h3>
         <router-link :to="{ name: 'Home' }" v-on:click.native="toggleMenu">Page d'accueil</router-link>
@@ -36,26 +31,38 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+h3 {
+  color: black;
+  margin: 30px 0;
+  font-size: 1.7em;
+  text-transform: uppercase;
+  font-weight: 700;
+  border-bottom: 3px solid black;
+  padding: 0 0 3px 0;  
+}
 
 .menu {
-  position: relative;
+  color: #696969;
+  position: fixed;
   z-index: 2;
+  width: 80px;
+  height: 100vh;
+  background: #696969;
 }
 
 .open-menu,
 .home-button {
-  position: absolute;
-  top: 20px;
+  color: black;
   width: 50px;
   height: 50px;
-  border: 1px solid;
+  border: 1px solid #696969;
   text-align: center;
   line-height: 50px;
   scursor: pointer;
-}
-
-.home-button {
-  left: 30px;
+  background: white;
+  margin: auto;
+  float: left;
+  margin: 15px 10px 0 10px;
 }
 
 .open-menu,
@@ -65,7 +72,6 @@ export default {
 }
 
 .open-menu {
-  right: 30px;
   cursor: pointer;
 }
 
@@ -73,13 +79,18 @@ export default {
   position: fixed;
   height: 100vh;
   top: 0;
-  right: 0;
-  min-width: 500px;
-  border: 1px solid black;
+  left: 80px;
+  border: 1px solid #696969;
   border-top: 0;
-  border-right: 0;
   border-bottom: 0;
   background: white;
+  overflow: hidden;
+  transition: 0.3s ease-out width;
+  width: 0;
+}
+
+.menu-open.isOpen {
+  width: 500px;
 }
 
 .close-menu {
@@ -90,17 +101,24 @@ export default {
 }
 
 .menu-list {
-  margin: 70px 50px;
+  margin: 10px 50px;
   text-align: left;
 }
 
 .menu-list a {
-    clear: both;
-    width: 100%;
-    float: left;
-    margin: 5px 0;
-    color: black;
-    text-decoration: none;
+  clear: both;
+  width: 100%;
+  float: left;
+  margin: 5px 0;
+  color: #696969;
+  text-decoration: none;
+  min-width: 400px;
+  transition: 0.3 ease-out all;
+}
+
+.menu-list a:hover {
+  color: black;
+  margin-left: 5px;
 }
 
 @media screen and (max-width: 700px) {
