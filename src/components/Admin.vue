@@ -12,6 +12,11 @@ export default {
   name: 'admin',
   components: {
     MenuAdmin
+  },
+  beforeRouteEnter (to, from, next) {
+    next(vm => {
+      vm.$root.getToken()
+    })
   }
 }
 </script>

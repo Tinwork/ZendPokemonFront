@@ -12,7 +12,7 @@ import TypesAdmin from '@/components/Admin/Types'
 Vue.use(Ressource)
 Vue.use(Router)
 
-export default new Router({
+const router = new Router({
   mode: 'history',
   routes: [
     {
@@ -61,3 +61,32 @@ export default new Router({
     }
   ]
 })
+
+const compareTime = function(was) {
+  return new Date() - was < 3600000
+}
+
+router.beforeEach((to, from, next) => {
+  if (to.path.match(/\/admin\//)) {
+    const token = JSON.parse(window.localStorage.getItem('token'))
+    if (token) {
+      const datestring = token.timestamp
+      if (compareTime(datestring)) {
+        next()
+      } else {
+        window.localStorage.removeItem('token')
+        next({
+          path: '/login'
+        })
+      }
+    } else {
+      next({
+        path: '/login'
+      })
+    }
+  } else {
+    next()
+  }
+})
+
+export default router
