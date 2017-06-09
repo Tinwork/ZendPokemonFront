@@ -1,7 +1,10 @@
 import uuid from 'node-uuid'
 
 const mutations = {
-  setPokemonShowWithRank: function (state, rank) {
+  setPokemonShowAdmin: function(state, pokemon) {
+    state.pokemonShowAdmin = pokemon
+  },
+  setPokemonShowWithRank: function(state, rank) {
     let i
     let tmp = state.pokemons.filter((pokemon, index) => {
       if (pokemon.rank === rank) {
@@ -12,19 +15,19 @@ const mutations = {
     tmp.index = i
     state.pokemonShow = tmp[0]
   },
-  setPokemonshowWithIndex: function (state, index) {
+  setPokemonshowWithIndex: function(state, index) {
     state.pokemonShow = state.pokemons[index]
     state.pokemonShow.index = index
   },
-  setPokemonMap: function (state, pokemon) {
+  setPokemonMap: function(state, pokemon) {
     state.pokemonMap = pokemon
   },
-  setPokemons: function (state, array) {
+  setPokemons: function(state, array) {
     if (array.lenght !== 0) {
       state.pokemons = array
     }
   },
-  filterById: function (state, comparaison) {
+  filterById: function(state, comparaison) {
     let tmp
     switch (comparaison) {
       case 'more':
@@ -40,7 +43,7 @@ const mutations = {
     }
     state.pokemons = tmp
   },
-  filterByName: function (state, comparaison) {
+  filterByName: function(state, comparaison) {
     let tmp
     switch (comparaison) {
       case 'asc':
@@ -56,7 +59,7 @@ const mutations = {
     }
     state.pokemons = tmp
   },
-  addAlert: function (state, { content, className }) {
+  addAlert: function(state, { content, className }) {
     const alert = {
       className,
       content,
@@ -67,13 +70,13 @@ const mutations = {
       mutations.deleteAlert(state, alert)
     }, 3500)
   },
-  deleteAlert: function (state, alertToRemove) {
+  deleteAlert: function(state, alertToRemove) {
     state.alerts = state.alerts.filter(alert => alert.id !== alertToRemove.id)
   },
-  setToken: function (state, token) {
+  setToken: function(state, token) {
     state.token = token
   },
-  setTypes: function (state, array) {
+  setTypes: function(state, array) {
     state.types = array
   }
 }

@@ -6,6 +6,7 @@ Vue.use(Vuex)
 
 const state = {
   pokemonShow: {},
+  pokemonShowAdmin: undefined,
   pokemonMap: {},
   pokemons: [],
   alerts: [],
@@ -20,6 +21,9 @@ const getters = {
   pokemonShow: state => {
     return state.pokemonShow
   },
+  pokemonShowAdmin: state => {
+    return state.pokemonShowAdmin
+  },
   pokemons: state => {
     return state.pokemons
   },
@@ -28,6 +32,22 @@ const getters = {
   },
   types: state => {
     return state.types
+  },
+  rankPosible: state => {
+    const n = 151
+    const array = Array(n).fill().map(function(element, index) {
+      let obj = {
+        disabled: false,
+        value: index + 1
+      }
+      return obj
+    })
+    if (state.pokemons.length > 0) {
+      state.pokemons.map(({ rank }) => {
+        array[rank - 1].disabled = true
+      })
+    }
+    return array
   }
 }
 

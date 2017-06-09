@@ -7,7 +7,12 @@ import Admin from '@/components/Admin'
 import Login from '@/components/Login'
 import Dashboard from '@/components/Admin/Dashboard'
 import PokemonsAdmin from '@/components/Admin/Pokemons'
+import PokemonsIndex from '@/components/Admin/Pokemons/Index'
+import PokemonsShow from '@/components/Admin/Pokemons/Show'
+import PokemonsCreate from '@/components/Admin/Pokemons/Create'
 import TypesAdmin from '@/components/Admin/Types'
+import TypesIndex from '@/components/Admin/Types/Index'
+import TypesShow from '@/components/Admin/Types/Show'
 
 Vue.use(Ressource)
 Vue.use(Router)
@@ -43,13 +48,44 @@ const router = new Router({
         },
         {
           path: 'pokemons',
-          name: 'Pokemons',
-          component: PokemonsAdmin
+          name: 'PokemonsAdmin',
+          component: PokemonsAdmin,
+          redirect: '/admin/pokemons/index',
+          children: [
+            {
+              path: 'index',
+              name: 'PokemonsIndex',
+              component: PokemonsIndex
+            },
+            {
+              path: 'show',
+              name: 'PokemonsShow',
+              component: PokemonsShow
+            },
+            {
+              path: 'create',
+              name: 'PokemonsCreate',
+              component: PokemonsCreate
+            }
+          ]
         },
         {
           path: 'types',
-          name: 'Types',
-          component: TypesAdmin
+          name: 'TypesAdmin',
+          component: TypesAdmin,
+          redirect: '/admin/typess/index',
+          children: [
+            {
+              path: 'index',
+              name: 'TypesIndex',
+              component: TypesIndex
+            },
+            {
+              path: ':id',
+              name: 'TypesShow',
+              component: TypesShow
+            }
+          ]
         }
       ]
     },
