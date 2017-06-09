@@ -72,8 +72,13 @@ export default {
       })
       formData.append('data', data);
       formData.append('file', this.file)
-      this.$http.post(`${window.API}/admin/pokemons?token=${this.$root.getToken().value}`, formData).then(result => {
-        this.update()
+      this.$http.post(`${window.API}/admin/pokemons?token=${this.$root.getToken().value}`, formData).then(response => {
+        if (response.data.code === 200) {
+          this.update()
+        } else {
+          console.error(response)
+          debugger
+        }
       }).catch(error => {
         debugger
       })
