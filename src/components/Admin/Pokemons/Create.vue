@@ -31,12 +31,16 @@
   <div class="evolutions">
     <div>
       <label>Post evolutions :</label>
-      <input type="text" v-model="evolutions.post_evolution">
+      <select v-model="evolutions.post_evolution" multiple>
+        <option v-for="pokemon in pokemons" :value="parseInt(pokemon.id)">{{pokemon.name}}</option>
+      </select>
     </div>
 
     <div>
       <label>Sub evolutions :</label>
-      <input type="text" v-model="evolutions.sub_evolution">
+      <select v-model="evolutions.sub_evolution" multiple>
+        <option v-for="pokemon in pokemons" :value="parseInt(pokemon.id)">{{pokemon.name}}</option>
+      </select>
     </div>
   </div>
 
@@ -54,8 +58,8 @@ export default {
        type: '',
        rank: '',
        evolutions: {
-         sub_evolution: null,
-         post_evolution: null
+         sub_evolution: [],
+         post_evolution: []
        }
     }
   },
@@ -70,6 +74,7 @@ export default {
           evolutions: this.evolutions
         }
       })
+      debugger
       formData.append('data', data);
       formData.append('file', this.file)
       this.$http.post(`${window.API}/admin/pokemons?token=${this.$root.getToken().value}`, formData).then(response => {
@@ -97,6 +102,9 @@ export default {
   computed: {
     types: function () {
       return this.$store.getters.types
+    },
+    pokemons: function () {
+      return this.$store.getters.pokemons
     },
     rankPosible: function () {
       return this.$store.getters.rankPosible
