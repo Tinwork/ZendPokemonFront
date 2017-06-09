@@ -10,7 +10,7 @@
         </div>
         <div class="item-show-content-right">
           Id: {{pokemon.rank}}
-          <div class="item-show-content-evolution" v-if="pokemon.evolutions">
+          <div class="item-show-content-evolution" v-if="pokemon.evolutions && pokemon.evolutions.length > 0">
             <h3>Evolutions</h3>
             
             <div v-if="pokemon.evolutions.sub_evolution">
