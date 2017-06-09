@@ -63,7 +63,7 @@ export default {
       this.$router.push({ name: 'Map' })
     },
     src: function (pokemon) {
-      return window.API + pokemon.thumbnail
+      return pokemon.thumbnail
     },
     setPokemonShow: function (pokemon) {
       this.$store.commit('setPokemonShowWithRank', pokemon.rank)

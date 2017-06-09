@@ -25,7 +25,7 @@ export default {
       this.$store.commit('setPokemonShowWithRank', rank)
     },
     src: function (pokemon) {
-      return window.API + pokemon.thumbnail
+      return pokemon.thumbnail
     }
   }
 }
