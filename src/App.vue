@@ -17,19 +17,19 @@ export default {
     AlertManager
   },
   methods: {
-    getPokemons: function () {
+    getPokemons () {
       this.$http.get(window.API + '/api/pokemons').then(response => {
         this.$store.commit('setPokemons', response.data.collection.response.pokemons)
         this.$store.commit('setPokemonshowWithIndex', 0)
       }).catch( console.error)
     },
-    getTypes: function () {
+    getTypes () {
       this.$http.get(window.API + '/api/types').then(response => {
         this.$store.commit('setTypes', response.data.collection.response.types)
       }).catch( console.error)
     }
   },
-  mounted: function () {
+  mounted () {
     this.getPokemons()
     this.getTypes()
   }

@@ -15,7 +15,7 @@
   export default { 
     name: 'pokemonIndex',
     computed: {
-      pokemons: function () {
+      pokemons () {
         return this.$store.getters.pokemons
       }
     },

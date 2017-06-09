@@ -1,6 +1,7 @@
 <template>
   <div class="menu">
     <div :class="['open-menu fa', displayMenu ? 'fa-close' : 'fa-bars']" @click="toggleMenu"></div>
+    <div class="localize fa fa-globe" @click="localize"></div>
     <div :class="['menu-open', displayMenu ? 'isOpen' : '']">
       <div class="menu-list">
         <h3>Menu</h3>
@@ -16,15 +17,19 @@
 <script>
 export default {
   name: 'menu',
-  data: function () {
+  data () {
     return {
       displayMenu: false
     }
   },
   methods: {
-    toggleMenu: function () {
+    toggleMenu () {
       this.displayMenu = this.displayMenu ? false : true
-    }
+    },
+    localize () {
+      this.$store.commit('setPokemonMap', this.$store.getters.pokemonShow)
+      this.$router.push({ name: 'Map' })
+    },
   }
 }
 </script>
@@ -42,20 +47,22 @@ h3 {
 }
 
 .menu {
-  color: #696969;
+  color: black;
   position: fixed;
   z-index: 2;
-  width: 80px;
+  width: 78px;
   height: 100vh;
-  background: #696969;
+  background: black;
+  border-right: 2px solid #696969;
 }
 
 .open-menu,
+.localize,
 .home-button {
   color: black;
   width: 50px;
   height: 50px;
-  border: 1px solid #696969;
+  border: 1px solid black;
   text-align: center;
   line-height: 50px;
   scursor: pointer;
@@ -63,6 +70,7 @@ h3 {
   margin: auto;
   float: left;
   margin: 15px 10px 0 10px;
+  cursor: pointer;
 }
 
 .open-menu,
@@ -71,18 +79,12 @@ h3 {
   color: black;
 }
 
-.open-menu {
-  cursor: pointer;
-}
-
 .menu-open {
+  border: 0;
   position: fixed;
   height: 100vh;
   top: 0;
   left: 80px;
-  border: 1px solid #696969;
-  border-top: 0;
-  border-bottom: 0;
   background: white;
   overflow: hidden;
   transition: 0.3s ease-out width;
@@ -91,6 +93,10 @@ h3 {
 
 .menu-open.isOpen {
   width: 500px;
+  border: 2px solid  #696969;
+  border-top: 0;
+  border-bottom: 0;
+  border-left: 0px;
 }
 
 .close-menu {
@@ -113,7 +119,7 @@ h3 {
   color: #696969;
   text-decoration: none;
   min-width: 400px;
-  transition: 0.3 ease-out all;
+  transition: 0.3s ease-out all;
 }
 
 .menu-list a:hover {

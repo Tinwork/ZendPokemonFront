@@ -20,7 +20,7 @@ export default {
         this.update()
       })
     },
-    update: function () {
+    update () {
       this.$http.get(window.API + '/api/types').then(response => {
         this.$store.commit('setTypes', response.data.collection.response.types)
       }).catch( console.error)
@@ -28,7 +28,7 @@ export default {
     }
   },
   computed: {
-    types: function () {
+    types () {
       return this.$store.getters.types
     }
   } 

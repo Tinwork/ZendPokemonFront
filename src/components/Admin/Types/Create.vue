@@ -20,7 +20,7 @@ export default {
     }
   },
   methods: {
-    createLabel: function () {
+    createLabel () {
       let formData = new FormData();
       let data = JSON.stringify({
         body: {
@@ -39,7 +39,7 @@ export default {
         debugger
       })
     },
-    update: function () {
+    update () {
       this.$http.get(window.API + '/api/types').then(response => {
         this.$store.commit('setTypes', response.data.collection.response.pokemons)
       }).catch( console.error)

@@ -15,7 +15,7 @@
 export default {
   name: 'item-list',
   computed: {
-    pokemons: function () {
+    pokemons () {
       return this.$store.getters.pokemons
     },
     

@@ -22,14 +22,14 @@ import ol from 'openlayers'
 
 export default {
   name: 'login',
-  data: function () {
+  data () {
     return {
       login: 'did',
       password: 'root'
     }
   },
   methods: {
-    validateInput: function () {
+    validateInput () {
       let formData = new FormData();
       formData.append('username', this.login);
       formData.append('password', this.password);
@@ -49,5 +49,8 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
+.login {
+  max-width: calc(100vw - 80px);
+  margin-left: 80px;
+}
 </style>

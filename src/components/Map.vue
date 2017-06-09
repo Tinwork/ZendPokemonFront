@@ -28,7 +28,7 @@ import ol from 'openlayers'
 
 export default {
   name: 'map',
-  data: function () {
+  data () {
     return {
       map: '',
       longitude: '',
@@ -37,15 +37,15 @@ export default {
     }
   },
   computed: {
-    selectedPokemon: function () {
+    selectedPokemon () {
       return this.$store.getters.pokemonMap.id
     },
-    pokemonsList : function () {
+    pokemonsList  () {
       return this.$store.getters.pokemons
     },
   },
   methods: {
-    initMap: function () {
+    initMap () {
       this.vectorSource = new ol.source.Vector();
       this.vectorLayer = new ol.layer.Vector({
         source: this.vectorSource
@@ -74,7 +74,7 @@ export default {
       this.selectedPokemon = pokemon
       this.$store.commit('setPokemonMap', pokemon)
     },
-    addNewPokemon: function () {
+    addNewPokemon () {
       if (this.longitude && this.latitude){
         let newPokemon = {
           coordinate: [this.longitude, this.latitude],
@@ -86,7 +86,7 @@ export default {
         this.longitude = null
       }
     },
-    initPokemon: function () {
+    initPokemon () {
       this.pokemonsIcons = [
         { 
           coordinate:  [-3737464.9350319784, 2798206.731463732], 
@@ -113,7 +113,7 @@ export default {
       this.vectorSource.addFeature(iconFeature);
     }
   },
-  mounted: function () {
+  mounted () {
     this.initMap()
     this.initPokemon()
   }
@@ -122,20 +122,33 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.map {
+  max-width: calc(100vw - 80px);
+  margin-left: 80px;
+}
 .map-title {
   position: absolute;
-  left: 0;
+  width: 100px;
   right: 0;
-  top: 21px;
+  top: 25px;
   text-align: center;
+  max-width: calc(100vw - 80px);
+  left: 80px;
+  margin: auto;
+  color: black;
+  font-size: 1.7em;
+  text-transform: uppercase;
+  font-weight: 700;
+  border-bottom: 3px solid black;
+  padding: 0 0 3px 0;
 }
 
 .map-form {
   position: absolute;
-  top: 16vh;
+  top: 12vh;
   width: 350px;
   min-height: 100px;
-  left: 11px;
+  left: 87px;
   box-sizing: border-box;
   padding: 10px;
   border: 1px solid;
@@ -171,9 +184,10 @@ button {
 }
 
 .map-content {
-  width: 100vw;
-  height: 85vh;
+  width: calc(100vw - 80px);
+  left: 80px;
+  height: 89vh;
   position: absolute;
-  top: 15vh;
+  top: 11vh;
 }
 </style>

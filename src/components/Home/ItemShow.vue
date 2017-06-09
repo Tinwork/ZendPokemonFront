@@ -6,12 +6,13 @@
     <div class="new-item">
       <h1>{{pokemon.name}}<span>, Rank : {{pokemon.rank}}</span></h1>
       <div class="types">
-        <div class="type" v-for="t in pokemon.type">{{ t.label }}</div>
+        <div v-if="pokemon.type_id" class="type">{{ pokemon.type_id }}</div>
       </div>
+
       <img :src="src(pokemon)">
     </div>
 
-    <div class="item-show-container">
+    <!--<div class="item-show-container">
       <h1>{{pokemon.name}}</h1>
       <div class="item-show-content">
         <div class="item-show-content-left">
@@ -37,12 +38,10 @@
             </div>
 
           </div>
-          <div class="item-show-content-localization">
-            <h3 @click="localize">Localiser ce pokemon</h3>
-          </div>
+         
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -50,7 +49,7 @@
 export default {
   name: 'item-show',
   methods: {
-    nextPokemon: function () {
+    nextPokemon () {
       let index = this.$store.state.pokemonShow.index + 1
       if (this.$store.getters.pokemons[index]) {
         this.$store.commit('setPokemonshowWithIndex', index)
@@ -58,18 +57,13 @@ export default {
         this.$store.commit('setPokemonshowWithIndex',  0)
       }
     },
-    prevPokemon: function () {
+    prevPokemon () {
       let index = this.$store.state.pokemonShow.index - 1
       if (this.$store.getters.pokemons[index]) {
         this.$store.commit('setPokemonshowWithIndex', index)
       } else {
         this.$store.commit('setPokemonshowWithIndex', this.$store.getters.pokemons.length - 1)
       }
-      
-    },
-    localize: function () {
-      this.$store.commit('setPokemonMap', this.pokemon)
-      this.$router.push({ name: 'Map' })
     },
     src: function (pokemon) {
       return pokemon.thumbnail
@@ -79,7 +73,7 @@ export default {
     }
   },
   computed: {
-    pokemon: function () {
+    pokemon () {
       return this.$store.getters.pokemonShow
     }
   }
@@ -88,6 +82,16 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+
+.new-item {
+  clear: both;
+  overflow: auto;
+}
+
+img {
+  max-width: 30vw;
+  max-height: 30vh;
+}
 
 h1 span {
   font-size: 0.7em;
@@ -112,6 +116,19 @@ h1 span {
   line-height: 50px;
   font-size: 30px;
   cursor: pointer;
+}
+
+.type {
+  background: gainsboro;
+  padding: 5px 20px;
+  border: 0px solid black;
+  border-radius: 15px;
+  font-size: 0.8em;
+  display: inline-block;
+}
+
+.types {
+  text-align: center;
 }
 
 .navigation.left {

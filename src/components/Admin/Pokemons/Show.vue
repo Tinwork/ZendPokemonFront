@@ -26,17 +26,17 @@
 export default { 
   name: 'pokemonsShow',
   computed: {
-    pokemon: function () {
+    pokemon () {
       return this.$store.getters.pokemonShowAdmin
     }
   },
   methods: {
-    deletePokemon: function () {
+    deletePokemon () {
       this.$http.delete(`${window.API}/admin/pokemons/${this.pokemon.id}?token=${this.$root.getToken().value}`).then(response => {
         this.update()
       })  
     },
-    update: function () {
+    update () {
       this.$http.get(window.API + '/api/pokemons').then(response => {
         this.$store.commit('setPokemons', response.data.collection.response.pokemons)
         this.$store.commit('setPokemonshowWithIndex', 0)
