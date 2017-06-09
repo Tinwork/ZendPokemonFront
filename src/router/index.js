@@ -12,7 +12,7 @@ import PokemonsShow from '@/components/Admin/Pokemons/Show'
 import PokemonsCreate from '@/components/Admin/Pokemons/Create'
 import TypesAdmin from '@/components/Admin/Types'
 import TypesIndex from '@/components/Admin/Types/Index'
-import TypesShow from '@/components/Admin/Types/Show'
+import TypesCreate from '@/components/Admin/Types/Create'
 
 Vue.use(Ressource)
 Vue.use(Router)
@@ -73,7 +73,7 @@ const router = new Router({
           path: 'types',
           name: 'TypesAdmin',
           component: TypesAdmin,
-          redirect: '/admin/typess/index',
+          redirect: '/admin/types/index',
           children: [
             {
               path: 'index',
@@ -81,9 +81,9 @@ const router = new Router({
               component: TypesIndex
             },
             {
-              path: ':id',
-              name: 'TypesShow',
-              component: TypesShow
+              path: 'create',
+              name: 'TypesCreate',
+              component: TypesCreate
             }
           ]
         }

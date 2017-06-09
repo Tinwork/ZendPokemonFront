@@ -21,8 +21,9 @@ export default {
   },
   methods: {
     deletePokemon: function () {
-      this.$http.delete(`${window.API}/admin/pokemons/${this.pokemon.id}?token=${this.$root.getToken().value}`)
-      this.update()
+      this.$http.delete(`${window.API}/admin/pokemons/${this.pokemon.id}?token=${this.$root.getToken().value}`).then(response => {
+        this.update()
+      })  
     },
     update: function () {
       this.$http.get(window.API + '/api/pokemons').then(response => {
