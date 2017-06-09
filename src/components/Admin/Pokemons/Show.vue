@@ -3,11 +3,22 @@
     <h1>Show Pokemon</h1>
 
     <p>{{ pokemon }}</p>
+    <p>Name: {{ pokemon.name }}</p>
+    <p>Rank: {{ pokemon.rank }}</p>
+    <p>Id: {{ pokemon.id }}</p>
+    <p>Type: {{ pokemon.type_id }}</p>
+    <div v-if="pokemon.evolutions.sub_evolution && pokemon.evolutions.sub_evolution.length > 0">
+      <p>Sub evolution:</p>
+      <p v-for="evolution in pokemon.evolutions.sub_evolution"> Name: {{evol }}</p>
+    </div>
 
-    <a @click="deletePokemon">Delete</a>
+    <div v-if="pokemon.evolutions.post_evolution && pokemon.evolutions.post_evolution.length > 0">
+      <p>Post evolution:</p>
+      <p v-for="evolution in pokemon.evolutions.post_evolution"> Name: {{evol }}</p>
+    </div>
 
-    <router-link :to="{ name: 'PokemonsIndex' }" >Back to index</router-link>
-
+    <button @click="deletePokemon">Delete</button>
+    <button @click="deletePokemon">Edit</button>
   </div>
 </template>
 
