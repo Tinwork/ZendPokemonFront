@@ -1,10 +1,16 @@
 <template>
   <div class="menu">
     <div :class="['icon open-menu fa', displayMenu ? 'fa-close' : 'fa-bars']" @click="toggleMenu"></div>
-    <div class="icon fa fa-globe" @click="localize"></div>
-    <div class="icon fa fa-angle-left" @click="prevPokemon"></div>
-    <div class="icon fa fa-angle-right" @click="nextPokemon"></div>
-    <div class="icon fa fa-search" @click="goToFilter"></div>
+    <div v-if="$route.name === 'Home'">
+      <div class="icon fa fa-globe"  @click="localize"></div>
+      <div class="icon fa fa-angle-left" @click="prevPokemon"></div>
+      <div class="icon fa fa-angle-right" @click="nextPokemon"></div>
+      <div class="icon fa fa-search" @click="goToFilter"></div>
+    </div>
+    <div v-if="$route.name === 'Map'">
+      <div class="icon fa fa-home"  @click="openLocalizeMenu"></div>
+    </div>
+    
     <div :class="['menu-open', displayMenu ? 'isOpen' : '']">
       <div class="menu-list">
         <h3>Menu</h3>
@@ -22,10 +28,20 @@ export default {
   name: 'menu',
   data () {
     return {
-      displayMenu: false
+      displayMenu: false,
+      displayForm: false
     }
   },
   methods: {
+    openLocalizeMenu () {
+      this.displayForm = this.displayForm ? false : true
+      if (this.displayForm) {
+        document.querySelector('.map-form').classList.add('isOpen')
+      } else {
+        document.querySelector('.map-form').classList.remove('isOpen')
+      }
+      
+    },
     goToFilter () {
       window.scrollTo(0, document.querySelector('.item-show').getBoundingClientRect().height);
     },

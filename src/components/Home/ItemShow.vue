@@ -6,7 +6,7 @@
         <div v-if="pokemon.type_id" class="type">{{ pokemon.type_id }}</div>
       </div>
 
-      <img :src="src(pokemon)">
+      <img class="main-display" :src="src(pokemon)">
     </div>
 
     <!--<div class="item-show-container">
@@ -69,9 +69,13 @@ export default {
   overflow: auto;
 }
 
-img {
-  max-width: 30vw;
-  max-height: 30vh;
+img.main-display {
+  width: 30vw;
+  height: 30vw;
+  max-width: 300px;
+  max-height: 300px;
+  border: 1px solid;
+  border-radius: 50%;
 }
 
 h1 span {

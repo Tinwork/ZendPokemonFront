@@ -2,8 +2,10 @@
   <div class="map">
     <h1 class="map-title">Map</h1>
     <div class="map-content"></div>
-    <div class="map-form">
-      <select v-model="selectedPokemon" @change="changeSelectedPokemon($event)">
+    <div class="menu-open map-form">
+      <div class="menu-list">
+        <h3>Localiser</h3>
+        <select v-model="selectedPokemon" @change="changeSelectedPokemon($event)">
         <option v-for="pokemon in pokemonsList" v-bind:value="pokemon.id">
           {{ pokemon.name }}
         </option>
@@ -19,6 +21,7 @@
       </div>
 
       <button @click="addNewPokemon" :disabled="!selectedPokemon || !latitude || !longitude">Envoyer</button>
+      </div>
     </div>
   </div>
 </template>
@@ -122,6 +125,15 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+h3 {
+  color: black;
+  margin: 30px 0;
+  font-size: 1.7em;
+  text-transform: uppercase;
+  font-weight: 700;
+  border-bottom: 3px solid black;
+  padding: 0 0 3px 0;  
+}
 .map {
   max-width: calc(100vw - 80px);
   margin-left: 80px;
@@ -141,18 +153,6 @@ export default {
   font-weight: 700;
   border-bottom: 3px solid black;
   padding: 0 0 3px 0;
-}
-
-.map-form {
-  position: absolute;
-  top: 12vh;
-  width: 350px;
-  min-height: 100px;
-  left: 87px;
-  box-sizing: border-box;
-  padding: 10px;
-  border: 1px solid;
-  background: white;
 }
 
 select {
@@ -189,5 +189,59 @@ button {
   height: 89vh;
   position: absolute;
   top: 11vh;
+}
+
+.menu-open {
+  border: 0;
+  position: fixed;
+  height: 100vh;
+  top: 0;
+  left: 80px;
+  background: white;
+  overflow: hidden;
+  transition: 0.3s ease-out width;
+  width: 0;
+}
+
+.menu-open.isOpen {
+  width: 500px;
+  border: 2px solid  #696969;
+  border-top: 0;
+  border-bottom: 0;
+  border-left: 0px;
+}
+
+.close-menu {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 16px;
+}
+
+.menu-list {
+  margin: 10px 50px;
+  text-align: left;
+}
+
+.menu-list a {
+  clear: both;
+  width: 100%;
+  float: left;
+  margin: 5px 0;
+  color: #696969;
+  text-decoration: none;
+  min-width: 400px;
+  transition: 0.3s ease-out all;
+}
+
+.menu-list a:hover {
+  color: black;
+  margin-left: 5px;
+}
+
+@media screen and (max-width: 700px) {
+  .isOpen {
+    width: calc(100vw - 80px) !important;
+  }
 }
 </style>
