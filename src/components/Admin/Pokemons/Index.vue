@@ -20,7 +20,7 @@
       }
     },
     methods: {
-      showPokemon: function (pokemon) {
+      showPokemon (pokemon) {
         this.$store.commit('setPokemonShowAdmin', pokemon)
         this.$router.push({name: 'PokemonsShow'})
         console.log(this.$store.getters.pokemonShowAdmin)

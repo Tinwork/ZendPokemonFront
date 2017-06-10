@@ -23,7 +23,7 @@
 export default {
   name: 'item-filter',
   methods: {
-    filterBy: function (action, comparaison) {
+    filterBy (action, comparaison) {
       if (action === 'id') {
         this.$store.commit('filterById', comparaison)
       } else if (action === 'desc') {

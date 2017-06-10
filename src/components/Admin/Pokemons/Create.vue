@@ -95,7 +95,7 @@ export default {
       }).catch( console.error)
       this.$router.push({name: 'PokemonsAdmin' })
     },
-    fileChange: function (e) {
+    fileChange (e) {
       this.file = e.target.files[0]
     }
   },

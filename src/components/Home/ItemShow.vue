@@ -65,16 +65,16 @@ export default {
         this.$store.commit('setPokemonshowWithIndex', this.$store.getters.pokemons.length - 1)
       }
     },
-    src: function (pokemon) {
+    src (pokemon) {
       return pokemon.thumbnail
     },
-    setPokemonShow: function (pokemon) {
+    setPokemonShow (pokemon) {
       this.$store.commit('setPokemonShowWithRank', pokemon.rank)
     }
   },
   computed: {
     pokemon () {
-      return this.$store.getters.pokemonShow
+      return this.$store.getters.pokemonShow || {}
     }
   }
 }

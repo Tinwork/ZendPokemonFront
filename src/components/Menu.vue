@@ -128,8 +128,8 @@ h3 {
 }
 
 @media screen and (max-width: 700px) {
-  .menu-open {
-    width: 100vw;
+  .isOpen {
+    width: calc(100vw - 80px);
   }
 }
 

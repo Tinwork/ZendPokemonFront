@@ -15,7 +15,7 @@
 export default { 
   name: 'typeIndex',
   methods: {
-    deleteType: function (type) {
+    deleteType (type) {
       this.$http.delete(`${window.API}/admin/types/${type.id}?token=${this.$root.getToken().value}`).then(response => {
         this.update()
       })

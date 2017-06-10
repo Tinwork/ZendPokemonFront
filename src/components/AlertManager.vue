@@ -16,7 +16,7 @@ export default {
     }
   },
   methods: {
-    deleteAlert: function (alert) {
+    deleteAlert (alert) {
       this.$store.commit('deleteAlert', alert)
     }
   }
