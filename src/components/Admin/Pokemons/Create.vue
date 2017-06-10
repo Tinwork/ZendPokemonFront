@@ -64,7 +64,7 @@ export default {
     }
   },
   methods: {
-    createPokemon: function () {
+    createPokemon () {
       let formData = new FormData();
       let data = JSON.stringify({
         body: {
@@ -88,7 +88,7 @@ export default {
         debugger
       })
     },
-    update: function () {
+    update () {
       this.$http.get(window.API + '/api/pokemons').then(response => {
         this.$store.commit('setPokemons', response.data.collection.response.pokemons)
         this.$store.commit('setPokemonshowWithIndex', 0)
@@ -100,13 +100,13 @@ export default {
     }
   },
   computed: {
-    types: function () {
+    types () {
       return this.$store.getters.types
     },
-    pokemons: function () {
+    pokemons () {
       return this.$store.getters.pokemons
     },
-    rankPosible: function () {
+    rankPosible () {
       return this.$store.getters.rankPosible
     }    
   }

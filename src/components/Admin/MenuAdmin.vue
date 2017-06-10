@@ -13,7 +13,7 @@
   export default {
     name: 'MenuAdmin',
     methods: {
-      logout: function () {
+      logout () {
         window.localStorage.removeItem('token')
         this.$router.push({name: 'Home'})
       }

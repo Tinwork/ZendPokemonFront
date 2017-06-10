@@ -11,7 +11,7 @@
 export default {
   name: 'AlertManager',
   computed: {
-    alerts: function () {
+    alerts () {
       return this.$store.getters.alerts
     }
   },
