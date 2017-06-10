@@ -1,8 +1,5 @@
 <template>
   <div class="item-show">
-    <a class="navigation left fa fa-angle-left" @click="prevPokemon"></a>
-    <a class="navigation right fa fa-angle-right" @click="nextPokemon"></a>
-
     <div class="new-item">
       <h1>{{pokemon.name}}<span>, Rank : {{pokemon.rank}}</span></h1>
       <div class="types">
@@ -49,22 +46,6 @@
 export default {
   name: 'item-show',
   methods: {
-    nextPokemon () {
-      let index = this.$store.state.pokemonShow.index + 1
-      if (this.$store.getters.pokemons[index]) {
-        this.$store.commit('setPokemonshowWithIndex', index)
-      } else {
-        this.$store.commit('setPokemonshowWithIndex',  0)
-      }
-    },
-    prevPokemon () {
-      let index = this.$store.state.pokemonShow.index - 1
-      if (this.$store.getters.pokemons[index]) {
-        this.$store.commit('setPokemonshowWithIndex', index)
-      } else {
-        this.$store.commit('setPokemonshowWithIndex', this.$store.getters.pokemons.length - 1)
-      }
-    },
     src (pokemon) {
       return pokemon.thumbnail
     },

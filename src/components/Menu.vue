@@ -1,7 +1,10 @@
 <template>
   <div class="menu">
-    <div :class="['open-menu fa', displayMenu ? 'fa-close' : 'fa-bars']" @click="toggleMenu"></div>
-    <div class="localize fa fa-globe" @click="localize"></div>
+    <div :class="['icon open-menu fa', displayMenu ? 'fa-close' : 'fa-bars']" @click="toggleMenu"></div>
+    <div class="icon fa fa-globe" @click="localize"></div>
+    <div class="icon fa fa-angle-left" @click="prevPokemon"></div>
+    <div class="icon fa fa-angle-right" @click="nextPokemon"></div>
+    <div class="icon fa fa-search" @click="goToFilter"></div>
     <div :class="['menu-open', displayMenu ? 'isOpen' : '']">
       <div class="menu-list">
         <h3>Menu</h3>
@@ -23,6 +26,9 @@ export default {
     }
   },
   methods: {
+    goToFilter () {
+      window.scrollTo(0, document.querySelector('.item-show').getBoundingClientRect().height);
+    },
     toggleMenu () {
       this.displayMenu = this.displayMenu ? false : true
     },
@@ -30,6 +36,26 @@ export default {
       this.$store.commit('setPokemonMap', this.$store.getters.pokemonShow)
       this.$router.push({ name: 'Map' })
     },
+    nextPokemon () {
+      if (this.$store.state.pokemonShow.index) {
+        let index = this.$store.state.pokemonShow.index + 1
+        if (this.$store.getters.pokemons[index]) {
+          this.$store.commit('setPokemonshowWithIndex', index)
+        } else {
+          this.$store.commit('setPokemonshowWithIndex',  0)
+        }
+      }   
+    },
+    prevPokemon () {
+      if (this.$store.state.pokemonShow.index) {
+        let index = this.$store.state.pokemonShow.index - 1
+        if (this.$store.getters.pokemons[index]) {
+          this.$store.commit('setPokemonshowWithIndex', index)
+        } else {
+          this.$store.commit('setPokemonshowWithIndex', this.$store.getters.pokemons.length - 1)
+        }
+      }
+    }
   }
 }
 </script>
@@ -56,21 +82,25 @@ h3 {
   border-right: 2px solid #696969;
 }
 
-.open-menu,
-.localize,
-.home-button {
+.icon {
   color: black;
   width: 50px;
   height: 50px;
   border: 1px solid black;
   text-align: center;
   line-height: 50px;
-  scursor: pointer;
+  cursor: pointer;
   background: white;
   margin: auto;
   float: left;
   margin: 15px 10px 0 10px;
   cursor: pointer;
+  font-size: 16px;
+}
+
+.fa-angle-left,
+.fa-angle-right {
+  font-size: 20px;
 }
 
 .open-menu,
