@@ -7,19 +7,20 @@
       <p>Type: {{ pokemon.type_id }}</p>
       <div v-if="pokemon.evolutions.sub_evolution && pokemon.evolutions.sub_evolution.length > 0">
         <p>Sub evolution:</p>
-        <p v-for="evolution in pokemon.evolutions.sub_evolution"> Name: {{evol }}</p>
+        <p v-for="evolution in pokemon.evolutions.sub_evolution"> Name: {{ evolution }}
+        </p>
       </div>
   
       <div v-if="pokemon.evolutions.post_evolution && pokemon.evolutions.post_evolution.length > 0">
         <p>Post evolution:</p>
-        <p v-for="evolution in pokemon.evolutions.post_evolution"> Name: {{evol }}</p>
+        <p v-for="evolution in pokemon.evolutions.post_evolution"> Name: {{evolution }}</p>
       </div>
   
       <button @click="setMode('edit')" type="button " class="btn btn-primary ">Edit</button>
     </div>
   
     <div class="edit" v-if="mode === 'edit'">
-      <form-pokemon></form-pokemon>
+      <form-pokemon mode="edit"></form-pokemon>
       <button @click="setMode('show')" type=" button " class="btn btn-primary ">Show</button>
     </div>
   
@@ -51,9 +52,6 @@ export default {
   methods: {
     setMode(mode) {
       this.mode = mode
-    },
-    updatePokemon() {
-      debugger
     },
     deletePokemon() {
       this.$http.delete(`${window.API}/admin/pokemons/${this.pokemon.id}?token=${this.$root.getToken().value}`).then(response => {

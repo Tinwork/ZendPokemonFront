@@ -1,6 +1,6 @@
 <template>
   <div class="create">
-    <form-pokemon></form-pokemon>
+    <form-pokemon mode="create"></form-pokemon>
   </div>
 </template>
 
