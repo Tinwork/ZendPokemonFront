@@ -2,15 +2,15 @@
   <div class="menu">
     <div :class="['icon open-menu fa', displayMenu ? 'fa-close' : 'fa-bars']" @click="toggleMenu"></div>
     <div v-if="$route.name === 'Home'">
-      <div class="icon fa fa-globe"  @click="localize"></div>
+      <div class="icon fa fa-globe" @click="localize"></div>
       <div class="icon fa fa-angle-left" @click="prevPokemon"></div>
       <div class="icon fa fa-angle-right" @click="nextPokemon"></div>
       <div class="icon fa fa-search" @click="goToFilter"></div>
     </div>
     <div v-if="$route.name === 'Map'">
-      <div class="icon fa fa-home"  @click="openLocalizeMenu"></div>
+      <div class="icon fa fa-map-marker" @click="openLocalizeMenu"></div>
     </div>
-    
+  
     <div :class="['menu-open', displayMenu ? 'isOpen' : '']">
       <div class="menu-list">
         <h3>Menu</h3>
@@ -26,43 +26,43 @@
 <script>
 export default {
   name: 'menu',
-  data () {
+  data() {
     return {
       displayMenu: false,
       displayForm: false
     }
   },
   methods: {
-    openLocalizeMenu () {
+    openLocalizeMenu() {
       this.displayForm = this.displayForm ? false : true
       if (this.displayForm) {
         document.querySelector('.map-form').classList.add('isOpen')
       } else {
         document.querySelector('.map-form').classList.remove('isOpen')
       }
-      
+
     },
-    goToFilter () {
+    goToFilter() {
       window.scrollTo(0, document.querySelector('.item-show').getBoundingClientRect().height);
     },
-    toggleMenu () {
+    toggleMenu() {
       this.displayMenu = this.displayMenu ? false : true
     },
-    localize () {
+    localize() {
       this.$store.commit('setPokemonMap', this.$store.getters.pokemonShow)
       this.$router.push({ name: 'Map' })
     },
-    nextPokemon () {
+    nextPokemon() {
       if (this.$store.state.pokemonShow.index) {
         let index = this.$store.state.pokemonShow.index + 1
         if (this.$store.getters.pokemons[index]) {
           this.$store.commit('setPokemonshowWithIndex', index)
         } else {
-          this.$store.commit('setPokemonshowWithIndex',  0)
+          this.$store.commit('setPokemonshowWithIndex', 0)
         }
-      }   
+      }
     },
-    prevPokemon () {
+    prevPokemon() {
       if (this.$store.state.pokemonShow.index) {
         let index = this.$store.state.pokemonShow.index - 1
         if (this.$store.getters.pokemons[index]) {
@@ -85,7 +85,7 @@ h3 {
   text-transform: uppercase;
   font-weight: 700;
   border-bottom: 3px solid black;
-  padding: 0 0 3px 0;  
+  padding: 0 0 3px 0;
 }
 
 .menu {
@@ -139,7 +139,7 @@ h3 {
 
 .menu-open.isOpen {
   width: 500px;
-  border: 2px solid  #696969;
+  border: 2px solid #696969;
   border-top: 0;
   border-bottom: 0;
   border-left: 0px;
@@ -178,5 +178,4 @@ h3 {
     width: calc(100vw - 80px);
   }
 }
-
 </style>
