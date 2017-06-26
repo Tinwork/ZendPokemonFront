@@ -30,14 +30,14 @@
     <div class="form-group">
       <label for="post-evolution">Post evolutions</label>
       <select v-model="evolutions.post_evolution" multiple class="form-control" id="post-evolution">
-        <option v-for="pokemon in pokemons" :value="parseInt(pokemon.id)">{{pokemon.name}}</option>
+        <option :key="pokemon" v-for="pokemon in pokemons" :value="parseInt(pokemon.rank)">{{pokemon.name}}</option>
       </select>
     </div>
   
     <div class="form-group">
       <label for="sub-evolution">Sub evolutions</label>
       <select v-model="evolutions.sub_evolution" multiple class="form-control" id="sub-evolution">
-        <option v-for="pokemon in pokemons" :value="parseInt(pokemon.id)">{{pokemon.name}}</option>
+        <option :key="pokemon" v-for="pokemon in pokemons" :value="parseInt(pokemon.rank)">{{pokemon.name}}</option>
       </select>
     </div>
   
@@ -52,16 +52,24 @@ export default {
   name: 'form',
   props: ['mode', 'pokemon'],
   data() {
-    const evolutions = this.pokemon.evolutions || {}
+    let pokemon = {
+      name: '',
+      type: '',
+      rank: '',
+      evolutions: {
+        sub_evolution: [],
+        post_evolution: []
+      }
+    }
+    if (typeof this.pokemon !== 'undefined') {
+      pokemon = Object.assign(pokemon, this.pokemon)
+    }
     return {
       file: '',
-      name: this.pokemon.name || '',
-      type: this.pokemon.type || '',
-      rank: this.pokemon.rank || '',
-      evolutions: {
-        sub_evolution: evolutions.sub_evolution || [],
-        post_evolution: evolutions.post_evolution || []
-      }
+      name: pokemon.name || '',
+      type: pokemon.type || '',
+      rank: pokemon.rank || '',
+      evolutions: pokemon.evolutions
     }
   },
   methods: {
@@ -100,6 +108,7 @@ export default {
       })
       formData.append('data', data);
       formData.append('file', this.file)
+      debugger
       this.$http.post(`${window.API}/admin/pokemons?token=${this.$root.getToken().value}`, formData).then(response => {
         if (response.data.code === 200) {
           this.update()

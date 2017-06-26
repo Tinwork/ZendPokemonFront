@@ -1,44 +1,36 @@
 <template>
   <div class="item-show">
     <div class="new-item">
-      <h1>{{pokemon.name}}<span>, Rank : {{pokemon.rank}}</span></h1>
+      <h1>{{pokemon.name}}
+        <span>, Rank : {{pokemon.rank}}</span>
+      </h1>
       <div class="types">
         <div v-if="pokemon.type_id" class="type">{{ pokemon.type_id }}</div>
       </div>
-
+  
       <img class="main-display" :src="src(pokemon)">
     </div>
-
-    <!--<div class="item-show-container">
-      <h1>{{pokemon.name}}</h1>
-      <div class="item-show-content">
-        <div class="item-show-content-left">
-          <img :src="src(pokemon)">
-        </div>
-        <div class="item-show-content-right">
-          Id: {{pokemon.rank}}
-          <div class="item-show-content-evolution" v-if="pokemon.evolutions && pokemon.evolutions.length > 0">
-            <h3>Evolutions</h3>
-            
-            <div v-if="pokemon.evolutions.sub_evolution">
-              <div v-for="evolution in pokemon.evolutions.sub_evolution" v-if="evolution[0]">
-                <h4>Subevolution</h4>
-                 <a @click="setPokemonShow(evolution[0])">{{evolution[0].name}}</a>
-              </div>
-            </div>
-
-            <div v-if="pokemon.evolutions.post_evolution">
-              <div v-for="evolution in pokemon.evolutions.post_evolution" v-if="evolution[0]">
-                <h4>Postevolution</h4>
-                <a @click="setPokemonShow(evolution[0])">{{evolution[0].name}}</a>
-              </div>
-            </div>
-
-          </div>
-         
+  
+    <div v-if="typeof pokemon.evolutions !== 'undefined'">
+  
+      <div v-if="pokemon.evolutions.sub_evolution">
+  
+        <p> Sub evol </p>
+  
+        <div :key="evolution" v-for="evolution in pokemon.evolutions.sub_evolution" v-if="!Array.isArray(evolution)">
+          <a @click="setPokemonShow(evolution)">{{evolution.name}}</a>
         </div>
       </div>
-    </div> -->
+  
+      <div v-if="pokemon.evolutions.post_evolution">
+        <p> Post evol </p>
+        <div :key="evolution" v-for="evolution in pokemon.evolutions.post_evolution" v-if="!Array.isArray(evolution)">
+          <a @click="setPokemonShow(evolution) ">{{evolution.name}}</a>
+        </div>
+      </div>
+  
+    </div>
+  
   </div>
 </template>
 
@@ -46,15 +38,15 @@
 export default {
   name: 'item-show',
   methods: {
-    src (pokemon) {
+    src(pokemon) {
       return pokemon.thumbnail
     },
-    setPokemonShow (pokemon) {
+    setPokemonShow(pokemon) {
       this.$store.commit('setPokemonShowWithRank', pokemon.rank)
     }
   },
   computed: {
-    pokemon () {
+    pokemon() {
       return this.$store.getters.pokemonShow || {}
     }
   }
@@ -63,7 +55,6 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
 .new-item {
   clear: both;
   overflow: auto;
@@ -194,5 +185,4 @@ h1 span {
     top: inherit;
   }
 }
-
 </style>
