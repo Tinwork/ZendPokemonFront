@@ -13,19 +13,26 @@
   
     <div v-if="typeof pokemon.evolutions !== 'undefined'">
   
-      <div v-if="pokemon.evolutions.sub_evolution">
-  
-        <p> Sub evol </p>
-  
+      <div class="sub-evol" v-if="pokemon.evolutions.sub_evolution">
         <div :key="evolution" v-for="evolution in pokemon.evolutions.sub_evolution" v-if="!Array.isArray(evolution)">
-          <a @click="setPokemonShow(evolution)">{{evolution.name}}</a>
+          <!--<img :src="evolution.thumbnail">-->
+  
+          <a @click="setPokemonShow(evolution)">
+  
+            <img src="https://css-tricks.com/wp-content/uploads/2014/05/align-items.svg">
+  
+          </a>
         </div>
       </div>
   
-      <div v-if="pokemon.evolutions.post_evolution">
-        <p> Post evol </p>
+      <div class="post-evol" v-if="pokemon.evolutions.post_evolution">
         <div :key="evolution" v-for="evolution in pokemon.evolutions.post_evolution" v-if="!Array.isArray(evolution)">
-          <a @click="setPokemonShow(evolution) ">{{evolution.name}}</a>
+  
+          <a @click="setPokemonShow(evolution) ">
+  
+            <img src="https://css-tricks.com/wp-content/uploads/2014/05/align-items.svg">
+  
+          </a>
         </div>
       </div>
   
@@ -58,6 +65,66 @@ export default {
 .new-item {
   clear: both;
   overflow: auto;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  height: 50%;
+  width: 50%;
+  margin: auto;
+}
+
+.sub-evol,
+.post-evol {
+  position: absolute;
+  margin: auto;
+  top: 0;
+  bottom: 0;
+
+  height: 99vh;
+
+  width: 25%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+.sub-evol>div,
+.post-evol>div {
+  width: 100%;
+  position: relative;
+  max-height: 200px;
+  overflow: hidden;
+  border-radius: 50%;
+  margin: auto;
+  max-width: 200px;
+  cursor: pointer;
+  border: 1px solid black;
+  transition: .1s border ease-in-out;
+}
+
+
+.sub-evol>div:hover,
+.post-evol>div:hover {
+  border: 5px solid black;
+}
+
+
+.sub-evol img,
+.post-evol img {
+  width: 100%;
+  height: 100%;
+}
+
+.post-evol {
+  left: 0;
+}
+
+.sub-evol {
+  right: 0;
 }
 
 img.main-display {
@@ -67,6 +134,7 @@ img.main-display {
   max-height: 300px;
   border: 1px solid;
   border-radius: 50%;
+  margin: 20px 0 0 0;
 }
 
 h1 span {

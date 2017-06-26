@@ -73,7 +73,20 @@ export default {
           this.$store.commit('setPokemonshowWithIndex', this.$store.getters.pokemons.length - 1)
         }
       }
+    },
+    keyEvent(e) {
+      if (e.keyCode === 37) {
+        this.prevPokemon()
+      } else if (e.keyCode == 39) {
+        this.nextPokemon()
+      }
     }
+  },
+  created() {
+    window.addEventListener('keyup', this.keyEvent)
+  },
+  destroyed() {
+    window.removeEventListener('keyup', this.keyEvent)
   }
 }
 </script>

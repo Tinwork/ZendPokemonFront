@@ -88,7 +88,7 @@ export default {
         formData.append('file', this.file)
       }
 
-      this.$http.put(`${window.API}/admin/pokemons?token=${this.$root.getToken().value}`, formData).then(response => {
+      this.$http.patch(`${window.API}/admin/pokemons?token=${this.$root.getToken().value}`, formData).then(response => {
         if (response.data.code === 200) {
           this.update()
         } else {
@@ -145,7 +145,8 @@ export default {
 <style>
 form {
   max-width: 1000px;
-  margin: auto 20px;
+  margin: auto;
+  padding: 0 20px;
   text-align: left;
 }
 </style>
