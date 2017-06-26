@@ -53,8 +53,9 @@ export default {
       this.$router.push({ name: 'Map' })
     },
     nextPokemon() {
-      if (this.$store.state.pokemonShow.index) {
-        let index = this.$store.state.pokemonShow.index + 1
+      const p = this.$store.getters.pokemonShow
+      if (typeof p.index !== 'undefined') {
+        let index = p.index + 1
         if (this.$store.getters.pokemons[index]) {
           this.$store.commit('setPokemonshowWithIndex', index)
         } else {
@@ -63,8 +64,9 @@ export default {
       }
     },
     prevPokemon() {
-      if (this.$store.state.pokemonShow.index) {
-        let index = this.$store.state.pokemonShow.index - 1
+      const p = this.$store.getters.pokemonShow
+      if (typeof p.index !== 'undefined') {
+        let index = p.index - 1
         if (this.$store.getters.pokemons[index]) {
           this.$store.commit('setPokemonshowWithIndex', index)
         } else {
