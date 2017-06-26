@@ -1,7 +1,11 @@
 <template>
   <div class="types">
     <h1>Types</h1>
-     <router-view class="nested-child"></router-view>
+  
+    <router-link :to="{ name: 'TypesIndex' }">Index</router-link>
+    <router-link :to="{ name: 'TypesCreate' }">Create</router-link>
+  
+    <router-view class="nested-child"></router-view>
   </div>
 </template>
 

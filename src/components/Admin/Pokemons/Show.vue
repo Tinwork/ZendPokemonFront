@@ -20,7 +20,7 @@
     </div>
   
     <div class="edit" v-if="mode === 'edit'">
-      <form-pokemon mode="edit"></form-pokemon>
+      <form-pokemon mode="edit" :pokemon="pokemon"></form-pokemon>
       <button @click="setMode('show')" type=" button " class="btn btn-primary ">Show</button>
     </div>
   

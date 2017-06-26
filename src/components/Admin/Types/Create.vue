@@ -1,26 +1,24 @@
 <template>
-<div class="create">
-  <h1>Create label</h1>
-
-  <div>
-    <label>Label :</label>
-    <input type="text" v-model="label">
-  </div>
-
-  <button @click="createLabel" :disabled="!label">Create</button>
-</div>
+  <form>
+    <div class="form-group">
+      <label for="label">Label name</label>
+      <input type="text" v-model="label" class="form-control" id="label" placeholder="Enter label">
+    </div>
+  
+    <button type="button" class="btn btn-primary" @click="createLabel" :disabled="!label ">Create</button>
+  </form>
 </template>
 
 <script>
-export default { 
+export default {
   name: 'pokemonCreate',
   data() {
     return {
-       label: ''
+      label: ''
     }
   },
   methods: {
-    createLabel () {
+    createLabel() {
       let formData = new FormData();
       let data = JSON.stringify({
         body: {
@@ -33,18 +31,24 @@ export default {
           this.update()
         } else {
           console.error(response)
-          debugger
         }
-      }).catch(error => {
-        debugger
-      })
+      }).catch(console.error)
     },
-    update () {
+    update() {
       this.$http.get(window.API + '/api/types').then(response => {
         this.$store.commit('setTypes', response.data.collection.response.pokemons)
-      }).catch( console.error)
-      this.$router.push({name: 'TypesAdmin' })
+        this.$router.push({ name: 'TypesAdmin' })
+      }).catch(console.error)
     }
   }
 }
 </script>
+
+
+<style>
+form {
+  max-width: 1000px;
+  margin: auto 20px;
+  text-align: left;
+}
+</style>

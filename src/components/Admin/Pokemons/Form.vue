@@ -41,8 +41,8 @@
       </select>
     </div>
   
-    <button v-if="mode === 'create'" type="button" class="btn btn-primary" @click="createPokemon" :disabled="!name || !type || !rank || !file">Create</button>
-    <button v-if="mode === 'edit'" type="button" class="btn btn-primary" @click="editPokemon" :disabled="!name || !type || !rank || !file">Edit</button>
+    <button v-if="mode === 'create'" type="button" class="btn btn-primary" @click="createPokemon" :disabled="!name || !type || !rank">Create</button>
+    <button v-if="mode === 'edit'" type="button" class="btn btn-primary" @click="editPokemon" :disabled="!name || !type || !rank">Edit</button>
   
   </form>
 </template>
@@ -50,16 +50,17 @@
 <script>
 export default {
   name: 'form',
-  props: ['mode'],
+  props: ['mode', 'pokemon'],
   data() {
+    const evolutions = this.pokemon.evolutions || {}
     return {
       file: '',
-      name: '',
-      type: '',
-      rank: '',
+      name: this.pokemon.name || '',
+      type: this.pokemon.type || '',
+      rank: this.pokemon.rank || '',
       evolutions: {
-        sub_evolution: [],
-        post_evolution: []
+        sub_evolution: evolutions.sub_evolution || [],
+        post_evolution: evolutions.post_evolution || []
       }
     }
   },
@@ -75,8 +76,11 @@ export default {
         }
       })
       formData.append('data', data);
-      formData.append('file', this.file)
-      this.$http.post(`${window.API}/admin/pokemons?token=${this.$root.getToken().value}`, formData).then(response => {
+      if (this.file) {
+        formData.append('file', this.file)
+      }
+
+      this.$http.put(`${window.API}/admin/pokemons?token=${this.$root.getToken().value}`, formData).then(response => {
         if (response.data.code === 200) {
           this.update()
         } else {
