@@ -9,17 +9,49 @@
       <label for="color">Label color</label>
       <color-picker v-model="color"></color-picker>
     </div>
+  
+    <div class="form-group">
+      <label for="badge">Select a badge</label>
+      <multiselect v-model="badge" placeholder="Select one" :options="badgeTypes" :allow-empty="true"></multiselect>
+    </div>
+  
     <button type="button" class="btn btn-primary" @click="createLabel" :disabled="!label ">Create</button>
   </form>
 </template>
 
 <script>
+import { Chrome } from 'vue-color'
+import Multiselect from 'vue-multiselect'
+
+const badgeTypes = [
+  'acier',
+  'combat',
+  'dragon',
+  'eau',
+  'electrik',
+  'fee',
+  'feu',
+  'glace',
+  'insecte',
+  'normal',
+  'plante',
+  'poison',
+  'psy',
+  'roche',
+  'sol',
+  'spectre',
+  'tenebres',
+  'vol'
+]
+
 export default {
   name: 'typeCreate',
   data() {
     return {
       label: '',
       color: '',
+      badge: '',
+      badgeTypes
     }
   },
   methods: {
@@ -29,6 +61,7 @@ export default {
         body: {
           label: this.label,
           color: this.color.hex,
+          badge: `${window.API}/img/badges/${this.badge}.png`
         }
       })
       formData.append('data', data);
@@ -46,13 +79,14 @@ export default {
         this.$router.push({ name: 'TypesAdmin' })
       }).catch(console.error)
     }
+  },
   components: {
     'color-picker': Chrome,
+    'multiselect': Multiselect
   }
 }
 </script>
-
-
+<style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
 <style>
 form {
   max-width: 1000px;
