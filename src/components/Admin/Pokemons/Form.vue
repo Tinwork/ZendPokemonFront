@@ -1,6 +1,5 @@
 <template>
   <form>
-  
     <div class="form-group">
       <label for="name">Pokemon name</label>
       <input type="text" v-model="name" class="form-control" id="name" placeholder="Enter name">
@@ -8,18 +7,12 @@
   
     <div class="form-group">
       <label for="type">Select a type</label>
-      <select class="form-control" v-model="type" id="type">
-        <option disabled value="">Please select one</option>
-        <option v-for="t in types" :value="t.id">{{ t.label }}</option>
-      </select>
+      <multiselect v-model="type" :options="types" :multiple="true" label="label" :close-on-select="false" :clear-on-select="false" :hide-selected="true" placeholder="Pick some"></multiselect>
     </div>
   
     <div class="form-group">
       <label for="type">Select a rank</label>
-      <select class="form-control" v-model="rank" id="type">
-        <option disabled value="">Please select one</option>
-        <option v-for="r in rankPosible" :disabled="r.disabled" :value="r.value">{{ r.value }}</option>
-      </select>
+      <multiselect v-model="rank" placeholder="Select one" :options="rankPosible" :allow-empty="true"></multiselect>
     </div>
   
     <div class="form-group">
@@ -29,32 +22,30 @@
   
     <div class="form-group">
       <label for="post-evolution">Post evolutions</label>
-      <select v-model="evolutions.post_evolution" multiple class="form-control" id="post-evolution">
-        <option :key="pokemon" v-for="pokemon in pokemons" :value="parseInt(pokemon.rank)">{{pokemon.name}}</option>
-      </select>
+      <multiselect v-model="evolutions.post_evolution" :options="pokemons" :multiple="true" label="name" :close-on-select="false" :clear-on-select="false" :hide-selected="true" placeholder="Pick some"></multiselect>
     </div>
   
     <div class="form-group">
       <label for="sub-evolution">Sub evolutions</label>
-      <select v-model="evolutions.sub_evolution" multiple class="form-control" id="sub-evolution">
-        <option :key="pokemon" v-for="pokemon in pokemons" :value="parseInt(pokemon.rank)">{{pokemon.name}}</option>
-      </select>
+      <multiselect v-model="evolutions.sub_evolution" :options="pokemons" :multiple="true" label="name" :close-on-select="false" :clear-on-select="false" :hide-selected="true" placeholder="Pick some"></multiselect>
     </div>
   
-    <button v-if="mode === 'create'" type="button" class="btn btn-primary" @click="createPokemon" :disabled="!name || !type || !rank">Create</button>
-    <button v-if="mode === 'edit'" type="button" class="btn btn-primary" @click="editPokemon" :disabled="!name || !type || !rank">Edit</button>
+    <button v-if="mode === 'create'" type="button" class="btn btn-primary" @click="createPokemon" :disabled="!name || !rank">Create</button>
+    <button v-if="mode === 'edit'" type="button" class="btn btn-primary" @click="editPokemon" :disabled="!name || !rank">Edit</button>
   
   </form>
 </template>
 
 <script>
+import Multiselect from 'vue-multiselect'
+
 export default {
   name: 'form',
   props: ['mode', 'pokemon'],
   data() {
     let pokemon = {
       name: '',
-      type: '',
+      type: [],
       rank: '',
       evolutions: {
         sub_evolution: [],
@@ -67,7 +58,7 @@ export default {
     return {
       file: '',
       name: pokemon.name || '',
-      type: pokemon.type || '',
+      type: pokemon.type || [],
       rank: pokemon.rank || '',
       evolutions: pokemon.evolutions
     }
@@ -77,10 +68,11 @@ export default {
       let formData = new FormData();
       let data = JSON.stringify({
         body: {
+          id: this.pokemon.id,
           name: this.name,
-          type: this.type,
+          type: this.parseTypes(this.type),
           rank: this.rank,
-          evolutions: this.evolutions
+          evolutions: this.parseEvolutions(this.evolutions)
         }
       })
       formData.append('data', data);
@@ -96,14 +88,27 @@ export default {
         }
       }).catch(console.error)
     },
+    parseTypes(types) {
+      return types.map(type => type.id)
+    },
+    parseEvolutions(evolutions) {
+      return ['sub_evolution', 'post_evolution'].reduce((memo, string) => {
+        if (evolutions[string] && evolutions[string].length !== 0) {
+          memo[string] = evolutions[string].map(evolution => parseInt(evolution.rank))
+        } else {
+          memo[string] = null
+        }
+        return memo
+      }, {})
+    },
     createPokemon() {
       let formData = new FormData();
       let data = JSON.stringify({
         body: {
           name: this.name,
-          type: this.type,
+          type: this.parseTypes(this.type),
           rank: this.rank,
-          evolutions: this.evolutions
+          evolutions: this.parseEvolutions(this.evolutions)
         }
       })
       formData.append('data', data);
@@ -129,19 +134,22 @@ export default {
     }
   },
   computed: {
-    types: function () {
+    types() {
       return this.$store.getters.types
     },
-    pokemons: function () {
+    pokemons() {
       return this.$store.getters.pokemons
     },
-    rankPosible: function () {
+    rankPosible() {
       return this.$store.getters.rankPosible
     }
+  },
+  components: {
+    'multiselect': Multiselect
   }
 }
 </script>
-
+<style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
 <style>
 form {
   max-width: 1000px;
