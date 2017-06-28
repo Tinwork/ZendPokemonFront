@@ -36,18 +36,17 @@ const getters = {
   rankPosible: state => {
     const n = 151
     const array = Array(n).fill().map(function(element, index) {
-      let obj = {
-        disabled: false,
-        value: index + 1
-      }
-      return obj
+      return index++
     })
+
     if (state.pokemons.length > 0) {
-      state.pokemons.map(({ rank }) => {
-        array[rank - 1].disabled = true
+      const pokemonRank = state.pokemons.map(pokemon => parseInt(pokemon.rank))
+      return array.filter(int => {
+        return !pokemonRank.includes(int)
       })
+    } else {
+      return array
     }
-    return array
   }
 }
 
