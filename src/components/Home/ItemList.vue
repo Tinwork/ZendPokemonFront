@@ -15,10 +15,10 @@
 export default {
   name: 'item-list',
   computed: {
-    pokemons () {
+    pokemons() {
       return this.$store.getters.pokemons
     },
-    
+
   },
   methods: {
     setPokemonShow: function (rank) {
@@ -34,8 +34,14 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .item-list {
-  margin: 0 0 50px 0;
+  padding: 0 0 50px 0;
+  position: absolute;
+  z-index: 3;
+  background: white;
+  width: 100%;
+  top: calc(100vh + 160px);
 }
+
 .item-list-container {
   margin: auto;
   max-width: 1500px;
