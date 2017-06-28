@@ -5,16 +5,21 @@
       <input type="text" v-model="label" class="form-control" id="label" placeholder="Enter label">
     </div>
   
+    <div class="form-group">
+      <label for="color">Label color</label>
+      <color-picker v-model="color"></color-picker>
+    </div>
     <button type="button" class="btn btn-primary" @click="createLabel" :disabled="!label ">Create</button>
   </form>
 </template>
 
 <script>
 export default {
-  name: 'pokemonCreate',
+  name: 'typeCreate',
   data() {
     return {
-      label: ''
+      label: '',
+      color: '',
     }
   },
   methods: {
@@ -22,7 +27,8 @@ export default {
       let formData = new FormData();
       let data = JSON.stringify({
         body: {
-          label: this.label
+          label: this.label,
+          color: this.color.hex,
         }
       })
       formData.append('data', data);
@@ -40,6 +46,8 @@ export default {
         this.$router.push({ name: 'TypesAdmin' })
       }).catch(console.error)
     }
+  components: {
+    'color-picker': Chrome,
   }
 }
 </script>
