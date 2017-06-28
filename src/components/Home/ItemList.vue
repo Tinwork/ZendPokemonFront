@@ -34,14 +34,8 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .item-list {
-  padding: 0 0 50px 0;
-  position: absolute;
-  z-index: 3;
-  background: white;
-  width: 100%;
-  top: calc(100vh + 160px);
+  margin: 0 0 50px 0;
 }
-
 .item-list-container {
   margin: auto;
   max-width: 1500px;

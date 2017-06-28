@@ -37,15 +37,9 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .item-filter {
-  min-height: 160px;
   clear: both;
   overflow: auto;
-  padding: 40px 0 20px 0;
-  position: absolute;
-  z-index: 4;
-  width: 100%;
-  top: 100vh;
-  background: white;
+  margin: 40px 0 20px 0;
 }
 
 .item-filter-container {
@@ -60,9 +54,8 @@ export default {
   margin: 0px 4% 4% 0;
   padding: 10px;
   box-sizing: border-box;
-  background: lightgray;
+  background: grey;
   cursor: pointer;
-  border: 1px solid black;
 }
 
 .filter:nth-child(4n) {

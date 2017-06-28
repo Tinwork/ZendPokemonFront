@@ -108,10 +108,6 @@ export default {
   height: 50%;
   width: 50%;
   margin: auto;
-
-  background: rgba(255, 255, 255, .5);
-  padding: 20px;
-  border-radius: 15px;
 }
 
 .sub-evol,
@@ -182,14 +178,10 @@ h1 span {
 }
 
 .item-show {
-
-  position: fixed;
+  position: relative;
   overflow: auto;
   border-bottom: 3px solid;
   min-height: 100vh;
-  z-index: 3;
-  width: 100%;
-  top: 0;
 }
 
 .navigation {
@@ -206,7 +198,11 @@ h1 span {
 }
 
 .type {
-  padding: 5px;
+  background: gainsboro;
+  padding: 5px 20px;
+  border: 0px solid black;
+  border-radius: 15px;
+  font-size: 0.8em;
   display: inline-block;
 }
 
