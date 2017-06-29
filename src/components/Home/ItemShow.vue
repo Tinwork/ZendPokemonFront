@@ -42,25 +42,34 @@
 </template>
 
 <script>
-function shadeBlendConvert(p, from, to) {
-  if (typeof (p) != "number" || p < -1 || p > 1 || typeof (from) != "string" || (from[0] != 'r' && from[0] != '#') || (typeof (to) != "string" && typeof (to) != "undefined")) return null; //ErrorCheck
-  if (!this.sbcRip) this.sbcRip = function (d) {
-    var l = d.length, RGB = new Object();
-    if (l > 9) {
-      d = d.split(",");
-      if (d.length < 3 || d.length > 4) return null;//ErrorCheck
-      RGB[0] = i(d[0].slice(4)), RGB[1] = i(d[1]), RGB[2] = i(d[2]), RGB[3] = d[3] ? parseFloat(d[3]) : -1;
-    } else {
-      if (l == 8 || l == 6 || l < 4) return null; //ErrorCheck
-      if (l < 6) d = "#" + d[1] + d[1] + d[2] + d[2] + d[3] + d[3] + (l > 4 ? d[4] + "" + d[4] : ""); //3 digit
-      d = i(d.slice(1), 16), RGB[0] = d >> 16 & 255, RGB[1] = d >> 8 & 255, RGB[2] = d & 255, RGB[3] = l == 9 || l == 5 ? r(((d >> 24 & 255) / 255) * 10000) / 10000 : -1;
-    }
-    return RGB;
+function color(col, amt) {
+
+  var usePound = false;
+
+  if (col[0] == "#") {
+    col = col.slice(1);
+    usePound = true;
   }
-  var i = parseInt, r = Math.round, h = from.length > 9, h = typeof (to) == "string" ? to.length > 9 ? true : to == "c" ? !h : false : h, b = p < 0, p = b ? p * -1 : p, to = to && to != "c" ? to : b ? "#000000" : "#FFFFFF", f = sbcRip(from), t = sbcRip(to);
-  if (!f || !t) return null; //ErrorCheck
-  if (h) return "rgb(" + r((t[0] - f[0]) * p + f[0]) + "," + r((t[1] - f[1]) * p + f[1]) + "," + r((t[2] - f[2]) * p + f[2]) + (f[3] < 0 && t[3] < 0 ? ")" : "," + (f[3] > -1 && t[3] > -1 ? r(((t[3] - f[3]) * p + f[3]) * 10000) / 10000 : t[3] < 0 ? f[3] : t[3]) + ")");
-  else return "#" + (0x100000000 + (f[3] > -1 && t[3] > -1 ? r(((t[3] - f[3]) * p + f[3]) * 255) : t[3] > -1 ? r(t[3] * 255) : f[3] > -1 ? r(f[3] * 255) : 255) * 0x1000000 + r((t[0] - f[0]) * p + f[0]) * 0x10000 + r((t[1] - f[1]) * p + f[1]) * 0x100 + r((t[2] - f[2]) * p + f[2])).toString(16).slice(f[3] > -1 || t[3] > -1 ? 1 : 3);
+
+  var num = parseInt(col, 16);
+
+  var r = (num >> 16) + amt;
+
+  if (r > 255) r = 255;
+  else if (r < 0) r = 0;
+
+  var b = ((num >> 8) & 0x00FF) + amt;
+
+  if (b > 255) b = 255;
+  else if (b < 0) b = 0;
+
+  var g = (num & 0x0000FF) + amt;
+
+  if (g > 255) g = 255;
+  else if (g < 0) g = 0;
+
+  return (usePound ? "#" : "") + (g | (b << 8) | (r << 16)).toString(16);
+
 }
 
 export default {
@@ -78,7 +87,7 @@ export default {
       if (typeof pokemon.type_id !== 'undefined' && pokemon.type_id.length !== 0) {
         switch (pokemon.type_id.length) {
           case 1:
-            return `background: linear-gradient(${Math.floor(Math.random() * 360) + 1}deg, ${shadeBlendConvert(pokemon.type_id[0].color, -0.3)}, ${shadeBlendConvert(pokemon.type_id[0].color, 0.3)});`
+            return `background: linear-gradient(${Math.floor(Math.random() * 360) + 1}deg, ${color(pokemon.type_id[0].color, -40)}, ${color(pokemon.type_id[0].color, 40)});`
             break
           case 2:
             return `background: linear-gradient(${Math.floor(Math.random() * 360) + 1}deg, ${pokemon.type_id[0].color}, ${pokemon.type_id[1].color});`
@@ -103,23 +112,23 @@ export default {
   position: absolute;
   left: 0;
   right: 0;
-  top: 0;
-  bottom: 0;
+  top: 10vh;
   height: 50%;
   width: 50%;
   margin: auto;
+  padding: 20px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 1px 1px 18px 0px black;
 }
 
 .sub-evol,
 .post-evol {
   position: absolute;
   margin: auto;
-  top: 0;
-  bottom: 0;
-
-  height: 99vh;
-
-  width: 25%;
+  bottom: 10vh;
+  height: 20vh;
+  width: 50%;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -129,13 +138,14 @@ export default {
 
 .sub-evol>div,
 .post-evol>div {
-  width: 100%;
   position: relative;
+  height: 100%;
   max-height: 200px;
+  max-width: 200px;
+  width: 100%;
   overflow: hidden;
   border-radius: 50%;
   margin: auto;
-  max-width: 200px;
   cursor: pointer;
   border: 1px solid black;
   transition: .1s border ease-in-out;
@@ -198,7 +208,6 @@ h1 span {
 }
 
 .type {
-  background: gainsboro;
   padding: 5px 20px;
   border: 0px solid black;
   border-radius: 15px;
