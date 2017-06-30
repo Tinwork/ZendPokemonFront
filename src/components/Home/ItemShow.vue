@@ -15,23 +15,16 @@
   
       <div class="sub-evol " v-if="pokemon.evolutions.sub_evolution ">
         <div :key="evolution " v-for="evolution in pokemon.evolutions.sub_evolution " v-if="!Array.isArray(evolution) ">
-          <!--<img >-->
-  
           <a @click="setPokemonShow(evolution) ">
-  
             <img :src="evolution.thumbnail ">
-  
           </a>
         </div>
       </div>
   
       <div class="post-evol " v-if="pokemon.evolutions.post_evolution ">
         <div :key="evolution " v-for="evolution in pokemon.evolutions.post_evolution " v-if="!Array.isArray(evolution) ">
-  
           <a @click="setPokemonShow(evolution) ">
-  
             <img :src="evolution.thumbnail ">
-  
           </a>
         </div>
       </div>
@@ -42,35 +35,7 @@
 </template>
 
 <script>
-function color(col, amt) {
-
-  var usePound = false;
-
-  if (col[0] == "#") {
-    col = col.slice(1);
-    usePound = true;
-  }
-
-  var num = parseInt(col, 16);
-
-  var r = (num >> 16) + amt;
-
-  if (r > 255) r = 255;
-  else if (r < 0) r = 0;
-
-  var b = ((num >> 8) & 0x00FF) + amt;
-
-  if (b > 255) b = 255;
-  else if (b < 0) b = 0;
-
-  var g = (num & 0x0000FF) + amt;
-
-  if (g > 255) g = 255;
-  else if (g < 0) g = 0;
-
-  return (usePound ? "#" : "") + (g | (b << 8) | (r << 16)).toString(16);
-
-}
+var Color = require('color');
 
 export default {
   name: 'item-show',
@@ -87,7 +52,9 @@ export default {
       if (typeof pokemon.type_id !== 'undefined' && pokemon.type_id.length !== 0) {
         switch (pokemon.type_id.length) {
           case 1:
-            return `background: linear-gradient(${Math.floor(Math.random() * 360) + 1}deg, ${color(pokemon.type_id[0].color, -40)}, ${color(pokemon.type_id[0].color, 40)});`
+            var light = Color(pokemon.type_id[0].color).lighten(0.3).rgb().string()
+            var dark = Color(pokemon.type_id[0].color).darken(0.3).rgb().string()
+            return `background: linear-gradient(${Math.floor(Math.random() * 360) + 1}deg, ${light}, ${dark});`
             break
           case 2:
             return `background: linear-gradient(${Math.floor(Math.random() * 360) + 1}deg, ${pokemon.type_id[0].color}, ${pokemon.type_id[1].color});`

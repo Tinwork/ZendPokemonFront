@@ -11,6 +11,7 @@
     "lint": "eslint --ext .js,.vue src"
   },
   "dependencies": {
+    "color": "^2.0.0",
     "node-uuid": "^1.4.8",
     "openlayers": "^4.1.1",
     "sharp": "^0.18.1",
