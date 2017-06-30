@@ -21,13 +21,13 @@
     </div>
   
     <div class="form-group">
-      <label for="post-evolution">Post evolutions</label>
-      <multiselect v-model="evolutions.post_evolution" :options="pokemons" :multiple="true" label="name" :close-on-select="false" :clear-on-select="false" :hide-selected="true" placeholder="Pick some"></multiselect>
+      <label for="sub-evolution">Sub evolutions</label>
+      <multiselect v-model="evolutions.sub_evolution" :options="pokemons" :multiple="true" label="name" :close-on-select="false" :clear-on-select="false" :hide-selected="true" placeholder="Pick some"></multiselect>
     </div>
   
     <div class="form-group">
-      <label for="sub-evolution">Sub evolutions</label>
-      <multiselect v-model="evolutions.sub_evolution" :options="pokemons" :multiple="true" label="name" :close-on-select="false" :clear-on-select="false" :hide-selected="true" placeholder="Pick some"></multiselect>
+      <label for="post-evolution">Post evolutions</label>
+      <multiselect v-model="evolutions.post_evolution" :options="pokemons" :multiple="true" label="name" :close-on-select="false" :clear-on-select="false" :hide-selected="true" placeholder="Pick some"></multiselect>
     </div>
   
     <button v-if="mode === 'create'" type="button" class="btn btn-primary" @click="createPokemon" :disabled="!name || !rank">Create</button>
