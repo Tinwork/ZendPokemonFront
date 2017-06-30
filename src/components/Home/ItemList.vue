@@ -2,7 +2,7 @@
   <div class="item-list">
     <div class="item-list-container">
       <div class="item-list-content">
-        <div class="item" v-for="pokemon in pokemons" @click="setPokemonShow(pokemon.rank)">
+        <div :key="pokemon" class="item" v-for="pokemon in pokemons" @click="setPokemonShow(pokemon.rank)">
           <img :src="src(pokemon)" alt="">
           <h3>{{pokemon.name}}</h3>
         </div>
@@ -36,6 +36,7 @@ export default {
 .item-list {
   margin: 0 0 50px 0;
 }
+
 .item-list-container {
   margin: auto;
   max-width: 1500px;
@@ -49,21 +50,29 @@ export default {
 .item {
   width: 22%;
   min-height: 200px;
-  background: gray;
+
+  background: #eee;
+  border: 1px solid #333;
+
   margin: 0px 4% 4% 0;
   float: left;
   text-align: center;
 }
 
 .item img {
-  min-height: 150px;
   width: 100%;
+  padding: 20px;
 }
 
 .item h3 {
+
   text-align: center;
   min-height: 50px;
-  margin: 2px 5px;
+  margin: 0;
+  padding: 2px 5px;
+  background: #333;
+  color: white;
+  line-height: 50px;
 }
 
 .item:nth-child(4n) {

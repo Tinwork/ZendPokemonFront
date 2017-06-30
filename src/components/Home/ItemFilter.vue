@@ -49,13 +49,22 @@ export default {
 
 
 .filter {
+
   width: 22%;
   float: left;
   margin: 0px 4% 4% 0;
   padding: 10px;
   box-sizing: border-box;
-  background: grey;
+  background: #ccc;
   cursor: pointer;
+  border: 1px solid #464a4c;
+  box-shadow: 4px 4px #464a4c;
+  transition: all .3s;
+}
+
+.filter:hover {
+  background: #464a4c;
+  color: white;
 }
 
 .filter:nth-child(4n) {

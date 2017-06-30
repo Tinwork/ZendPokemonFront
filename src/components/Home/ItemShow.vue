@@ -44,9 +44,25 @@ export default {
       return pokemon.thumbnail
     },
     setPokemonShow(pokemon, eveny) {
-      const originElement = event.srcElement.getBoundingClientRect()
-      const mainElement = document.querySelector('.main-display').getBoundingClientRect()
-      this.$store.commit('setPokemonShowWithRank', pokemon.rank)
+      const { top, width, height, left } = event.srcElement.getBoundingClientRect()
+      const mainElement = document.querySelector('.main-display')
+      mainElement.style.margin = 'initial'
+      mainElement.style.left = mainElement.getBoundingClientRect().left
+      mainElement.style.top = `${top}px`
+      mainElement.style.left = `${left}px`
+      mainElement.style.width = `${width}px`
+      mainElement.style.height = `${height}px`
+      mainElement.style.opacity = 0
+
+      setTimeout(() => {
+        mainElement.style.top = null
+        mainElement.style.left = null
+        mainElement.style.width = null
+        mainElement.style.height = null
+        mainElement.style.opacity = null
+        mainElement.style.margin = null
+        this.$store.commit('setPokemonShowWithRank', pokemon.rank)
+      }, 500)
     },
     gradient(pokemon) {
       if (typeof pokemon.type_id !== 'undefined' && pokemon.type_id.length !== 0) {
@@ -74,18 +90,19 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .new-item {
+
   clear: both;
   overflow: auto;
-  position: absolute;
   left: 0;
   right: 0;
-  top: 10vh;
+  margin: 10vh auto;
+  min-height: 500px;
   height: 50%;
   width: 50%;
-  margin: auto;
   padding: 20px;
   background: white;
   border-radius: 10px;
+
   box-shadow: 1px 1px 18px 0px black;
 }
 
@@ -132,21 +149,24 @@ export default {
 }
 
 .post-evol {
-  left: 0;
-}
-
-.sub-evol {
   right: 0;
 }
 
+.sub-evol {
+  left: 0;
+}
+
 img.main-display {
+
+  transition: all .5s ease-in-out;
   width: 30vw;
   height: 30vw;
   max-width: 300px;
   max-height: 300px;
-  border: 1px solid;
-  border-radius: 50%;
-  margin: 20px 0 0 0;
+  margin: initial;
+  position: absolute;
+  left: calc(50% - 150px);
+  top: 25vh;
 }
 
 h1 span {
