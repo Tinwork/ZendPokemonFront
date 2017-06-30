@@ -6,21 +6,21 @@
       <div class="menu-list">
         <h3>Localiser</h3>
         <select v-model="selectedPokemon" @change="changeSelectedPokemon($event)">
-        <option v-for="pokemon in pokemonsList" v-bind:value="pokemon.id">
-          {{ pokemon.name }}
-        </option>
-      </select>
-
-      <div class="input">
-        <label>Longitude</label>
-        <input type="text" v-model="longitude">
-      </div>
-      <div class="input">
-        <label>Latitude</label>
-        <input type="text" v-model="latitude">
-      </div>
-
-      <button @click="addNewPokemon" :disabled="!selectedPokemon || !latitude || !longitude">Envoyer</button>
+          <option :key="pokemon" v-for="pokemon in pokemonsList" v-bind:value="pokemon.id">
+            {{ pokemon.name }}
+          </option>
+        </select>
+  
+        <div class="input">
+          <label>Longitude</label>
+          <input type="text" v-model="longitude">
+        </div>
+        <div class="input">
+          <label>Latitude</label>
+          <input type="text" v-model="latitude">
+        </div>
+  
+        <button @click="addNewPokemon" :disabled="!selectedPokemon || !latitude || !longitude">Envoyer</button>
       </div>
     </div>
   </div>
@@ -31,7 +31,7 @@ import ol from 'openlayers'
 
 export default {
   name: 'map',
-  data () {
+  data() {
     return {
       map: '',
       longitude: '',
@@ -40,15 +40,15 @@ export default {
     }
   },
   computed: {
-    selectedPokemon () {
+    selectedPokemon() {
       return this.$store.getters.pokemonMap.id
     },
-    pokemonsList  () {
+    pokemonsList() {
       return this.$store.getters.pokemons
     },
   },
   methods: {
-    initMap () {
+    initMap() {
       this.vectorSource = new ol.source.Vector();
       this.vectorLayer = new ol.layer.Vector({
         source: this.vectorSource
@@ -57,7 +57,7 @@ export default {
         layers: [
           new ol.layer.Tile(
             { source: new ol.source.OSM() }
-          ), 
+          ),
           this.vectorLayer
         ],
         target: document.querySelector(".map-content"),
@@ -77,29 +77,43 @@ export default {
       this.selectedPokemon = pokemon
       this.$store.commit('setPokemonMap', pokemon)
     },
-    addNewPokemon () {
-      if (this.longitude && this.latitude){
-        let newPokemon = {
-          coordinate: [this.longitude, this.latitude],
-          src: this.$store.getters.pokemonMap.thumbnail
-        }
+    addNewPokemon() {
+      if (this.longitude && this.latitude) {
+        const pok = this.$store.getters.pokemonMap
+        const formData = new FormData()
+        let data = JSON.stringify({
+          body: {
+            longitude: this.longitude,
+            latitude: this.latitude
+          }
+        })
+        formData.append('data', data);
 
-        this.addPokemon(newPokemon)
-        this.latitude = null
-        this.longitude = null
+        this.$http.post(`${window.API}/api/geo/pokemons/${pok.id}`, formData).then(response => {
+          if (response.data.code === 200) {
+            debugger
+            let newPokemon = {
+              coordinate: [this.longitude, this.latitude],
+              src: pok.icon
+            }
+            this.update()
+          } else {
+            console.error(response)
+          }
+        }).catch(console.error)
       }
     },
-    initPokemon () {
-      this.pokemonsIcons = [
-        { 
-          coordinate:  [-3737464.9350319784, 2798206.731463732], 
-          src: 'http://www.pokepedia.fr/images/7/72/Miniat_6_x_001.png' 
-        }
-      ]
+    update() {
+      this.$http.get(`${window.API}/api/geo/pokemons?long=48.8246&lat=2.56619&r=10000`).then(response => {
+        this.pokemonsIcons = response.data.response.result.collection
 
-      for (let pokemon of this.pokemonsIcons) {
-        this.addPokemon(pokemon)
-      }
+        // for (let pokemon of this.pokemonsIcons) {
+        //   this.addPokemon(pokemon)
+        // }
+      }).catch(console.error)
+    },
+    initPokemon() {
+      this.update()
     },
     addPokemon: function (pokemon) {
       const coordinates = new ol.geom.Point(pokemon.coordinate);
@@ -108,7 +122,7 @@ export default {
       });
       iconFeature.setStyle(
         new ol.style.Style({
-          image: new ol.style.Icon ({
+          image: new ol.style.Icon({
             src: pokemon.src || 'http://www.pokepedia.fr/images/7/72/Miniat_6_x_001.png'
           })
         })
@@ -116,7 +130,7 @@ export default {
       this.vectorSource.addFeature(iconFeature);
     }
   },
-  mounted () {
+  mounted() {
     this.initMap()
     this.initPokemon()
   }
@@ -132,12 +146,14 @@ h3 {
   text-transform: uppercase;
   font-weight: 700;
   border-bottom: 3px solid black;
-  padding: 0 0 3px 0;  
+  padding: 0 0 3px 0;
 }
+
 .map {
   max-width: calc(100vw - 80px);
   margin-left: 80px;
 }
+
 .map-title {
   position: absolute;
   width: 100px;
@@ -205,7 +221,7 @@ button {
 
 .menu-open.isOpen {
   width: 500px;
-  border: 2px solid  #696969;
+  border: 2px solid #696969;
   border-top: 0;
   border-bottom: 0;
   border-left: 0px;
