@@ -14,7 +14,6 @@
     "color": "^2.0.0",
     "node-uuid": "^1.4.8",
     "openlayers": "^4.1.1",
-    "sharp": "^0.18.1",
     "vue": "^2.3.3",
     "vue-color": "^2.2.0",
     "vue-multiselect": "^2.0.0-beta.15",
@@ -74,9 +73,5 @@
     "node": ">= 4.0.0",
     "npm": ">= 3.0.0"
   },
-  "browserslist": [
-    "> 1%",
-    "last 2 versions",
-    "not ie <= 8"
-  ]
+  "browserslist": ["> 1%", "last 2 versions", "not ie <= 8"]
 }
