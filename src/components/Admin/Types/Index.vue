@@ -4,16 +4,22 @@
       <thead>
         <tr>
           <th>Type</th>
-          <th>Id</th>
+          <th>Badge</th>
           <th>Actions</th>
         </tr>
       </thead>
       <tbody>
         <tr class="type" :key="t" v-bind:types="types" v-for="t in types">
           <th scope="row"> {{ t.label }} </th>
-          <td>{{ t.id }}</td>
           <td>
-            <button @click="deleteType(t)" type="button " class="btn btn-primary ">Delete</button>
+            <img :src="t.badge_path">
+          </td>
+          <td>
+  
+            <button @click="editType(t)" type="button " class="btn btn-primary ">Edit</button>
+  
+            <button @click="deleteType(t)" type="button " class="btn btn-danger ">Delete</button>
+  
           </td>
         </tr>
       </tbody>
@@ -30,11 +36,15 @@ export default {
         this.update()
       })
     },
+    editType(type) {
+      this.$store.commit('setTypeShowAdmin', type)
+      this.$router.push({ name: 'TypesEdit' })
+    },
     update() {
       this.$http.get(window.API + '/api/types').then(response => {
         this.$store.commit('setTypes', response.data.collection.response.types)
       }).catch(console.error)
-      this.$router.push({ name: 'TypesAdmin' })
+      this.$router.push({ name: 'TypesIndex' })
     }
   },
   computed: {

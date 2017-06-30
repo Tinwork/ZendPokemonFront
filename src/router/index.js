@@ -6,18 +6,21 @@ import Map from '@/components/Map'
 import Admin from '@/components/Admin'
 import Login from '@/components/Login'
 import Dashboard from '@/components/Admin/Dashboard'
+
 import PokemonsAdmin from '@/components/Admin/Pokemons'
 import PokemonsIndex from '@/components/Admin/Pokemons/Index'
 import PokemonsShow from '@/components/Admin/Pokemons/Show'
 import PokemonsCreate from '@/components/Admin/Pokemons/Create'
+
 import TypesAdmin from '@/components/Admin/Types'
 import TypesIndex from '@/components/Admin/Types/Index'
 import TypesCreate from '@/components/Admin/Types/Create'
+import TypesEdit from '@/components/Admin/Types/Edit'
 
 Vue.use(Ressource)
 Vue.use(Router)
 
-const router = new Router({
+let router = new Router({
   mode: 'history',
   routes: [
     {
@@ -84,6 +87,14 @@ const router = new Router({
               path: 'create',
               name: 'TypesCreate',
               component: TypesCreate
+            },
+            {
+              path: 'edit',
+              name: 'TypesEdit',
+              component: TypesEdit,
+              props: {
+                type: undefined
+              }
             }
           ]
         }

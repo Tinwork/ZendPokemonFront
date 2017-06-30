@@ -1,6 +1,6 @@
 <template>
   <form>
-    <div class="form-group">
+    <div class="form-group" v-if="type">
       <label for="label">Label name</label>
       <input type="text" v-model="label" class="form-control" id="label" placeholder="Enter label">
     </div>
@@ -12,7 +12,7 @@
   
     <div class="form-group">
       <label for="badge">Select a badge</label>
-      <multiselect v-model="badge" placeholder="Select one" :options="badgeTypes" track-by="label" label="label" :allow-empty="true"></multiselect>
+      <multiselect v-if="badgeTypes" v-model="badge" placeholder="Select one" :options="badgeTypes" track-by="src" label="label" :allow-empty="true"></multiselect>
     </div>
   
     <button type="button" class="btn btn-primary" @click="createLabel" :disabled="!label ">Create</button>
@@ -25,13 +25,13 @@ import Multiselect from 'vue-multiselect'
 
 
 export default {
-  name: 'typeCreate',
+  name: 'typeEdit',
   data() {
     return {
       label: '',
       color: '',
       badge: '',
-      badgeTypes: this.badgeTypes || []
+      badgeTypes: ''
     }
   },
   methods: {
@@ -40,12 +40,12 @@ export default {
       let data = JSON.stringify({
         body: {
           label: this.label,
-          color: this.color.hex,
-          badge: this.badge.src
+          color: this.color.hex || this.color,
+          badge_path: this.badge.src
         }
       })
       formData.append('data', data);
-      this.$http.post(`${window.API}/admin/types?token=${this.$root.getToken().value}`, formData).then(response => {
+      this.$http.put(`${window.API}/admin/types/${this.type.id}?token=${this.$root.getToken().value}`, formData).then(response => {
         if (response.data.code === 200) {
           this.update()
         } else {
@@ -55,7 +55,7 @@ export default {
     },
     update() {
       this.$http.get(window.API + '/api/types').then(response => {
-        this.$store.commit('setTypes', response.data.collection.response.pokemons)
+        this.$store.commit('setTypes', response.data.collection.response.types)
         this.$router.push({ name: 'TypesAdmin' })
       }).catch(console.error)
     }
@@ -64,7 +64,21 @@ export default {
     'color-picker': Chrome,
     'multiselect': Multiselect
   },
-  mounted() {
+  computed: {
+    type() {
+      const type = this.$store.getters.typeShowAdmin
+      this.label = type.label
+      this.color = type.color
+      this.badge = {
+        src: type.badge_path
+      }
+      return type
+    }
+  },
+  created() {
+    if (typeof this.type === 'undefined') {
+      this.$router.push({ name: 'TypesEdit' })
+    }
     this.$http.get(`${window.API}/api/types/badges`).then(response => {
       this.badgeTypes = response.data.collection.map(obj => {
         return {

@@ -4,6 +4,9 @@ const mutations = {
   setPokemonShowAdmin: function(state, pokemon) {
     state.pokemonShowAdmin = pokemon
   },
+  setTypeShowAdmin(state, type) {
+    state.typeShowAdmin = type
+  },
   setPokemonShowWithRank: function(state, rank) {
     let i
     let tmp = state.pokemons.filter((pokemon, index) => {

@@ -11,6 +11,7 @@ const state = {
   pokemons: [],
   alerts: [],
   types: [],
+  typeShowAdmin: undefined,
   token: undefined
 }
 
@@ -32,6 +33,9 @@ const getters = {
   },
   types: state => {
     return state.types
+  },
+  typeShowAdmin: state => {
+    return state.typeShowAdmin
   },
   rankPosible: state => {
     const n = 151
