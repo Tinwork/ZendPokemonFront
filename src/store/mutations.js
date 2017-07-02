@@ -35,12 +35,12 @@ const mutations = {
     switch (comparaison) {
       case 'more':
         tmp = state.pokemons.sort((a, b) => {
-          return b.nbVotes - a.nbVotes
+          return b.rank - a.rank
         })
         break
       case 'less':
         tmp = state.pokemons.sort((a, b) => {
-          return a.nbVotes - b.nbVotes
+          return a.rank - b.rank
         })
         break
     }
@@ -51,12 +51,12 @@ const mutations = {
     switch (comparaison) {
       case 'asc':
         tmp = state.pokemons.sort((a, b) => {
-          return b.title.localeCompare(a.title)
+          return b.name.localeCompare(a.name)
         })
         break
       case 'desc':
         tmp = state.pokemons.sort((a, b) => {
-          return a.title.localeCompare(b.title)
+          return a.name.localeCompare(b.name)
         })
         break
     }

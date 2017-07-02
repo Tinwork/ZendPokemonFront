@@ -80,7 +80,7 @@ export default {
 @media screen and (max-width: 700px) {
   .item-filter-container {
     max-width: calc(100% - 40px);
-  }
+  } 
 
   .filter-container {
     display: block;
