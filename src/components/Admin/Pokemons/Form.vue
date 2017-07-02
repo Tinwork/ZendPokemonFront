@@ -53,7 +53,19 @@ export default {
       }
     }
     if (typeof this.pokemon !== 'undefined') {
-      pokemon = Object.assign(pokemon, this.pokemon)
+      const types = this.$store.getters.types
+      const type = this.pokemon.type_id.reduce((memo, t) => {
+        const foundType = types.find(type => type.label === t.label)
+        memo.push({
+          id: parseInt(foundType.id),
+          label: foundType.label,
+          badge_path: foundType.badge_path,
+          color: foundType.color
+        })
+        return memo
+      }, [])
+      
+      pokemon = Object.assign(pokemon, this.pokemon, { type })
     }
     return {
       file: '',
