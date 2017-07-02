@@ -78,12 +78,20 @@ export default {
   methods: {
     editPokemon() {
       let formData = new FormData();
+      // let fData = JSON.stringify({
+      //   body: {
+      //     id: this.pokemon.id,
+      //     name: this.name,
+      //     type: this.parseTypes(this.type),
+      //     rank: this.rank,
+      //     evolutions: this.parseEvolutions(this.evolutions)
+      //   }
+      // })
       let data = JSON.stringify({
         body: {
-          id: this.pokemon.id,
-          name: this.name,
-          type: this.parseTypes(this.type),
           rank: this.rank,
+          name: this.name,
+          type: this.type,
           evolutions: this.parseEvolutions(this.evolutions)
         }
       })
@@ -92,7 +100,7 @@ export default {
         formData.append('file', this.file)
       }
 
-      this.$http.patch(`${window.API}/admin/pokemons?token=${this.$root.getToken().value}`, formData).then(response => {
+      this.$http.put(`${window.API}/admin/pokemons/${this.pokemon.id}?token=${this.$root.getToken().value}`, formData).then(response => {
         if (response.data.code === 200) {
           this.update()
         } else {
