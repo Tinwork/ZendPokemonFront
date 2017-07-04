@@ -87,14 +87,13 @@ export default {
             latitude: this.latitude
           }
         })
+        this.longitude = this.latitude = undefined
         formData.append('data', data);
 
         this.$http.post(`${window.API}/api/geo/pokemons/${pok.id}`, formData).then(response => {
           if (response.data.code === 200) {
-            debugger
             let newPokemon = {
-              coordinate: [this.longitude, this.latitude],
-              src: pok.icon
+              coordinate: [this.latitude, this.longitude]
             }
             this.update()
           } else {
@@ -105,18 +104,31 @@ export default {
     },
     update() {
       this.$http.get(`${window.API}/api/geo/pokemons?long=48.8246&lat=2.56619&r=10000`).then(response => {
-        this.pokemonsIcons = response.data.response.result.collection
-
-        // for (let pokemon of this.pokemonsIcons) {
-        //   this.addPokemon(pokemon)
-        // }
+        const pokemonsIcons = response.data.response.result.collection
+        for (let p of Object.entries(pokemonsIcons)) {
+          let { icon, position } = p[1].pokemon
+          let style = new ol.style.Style({
+            image: new ol.style.Icon({
+              src: icon
+            })
+          })
+          console.log('SRC of pokemon', icon)
+          for (let { latitude, longitude } of position) {
+            console.log('Postion:',latitude, longitude)
+            let iconFeature = new ol.Feature({
+              geometry: new ol.geom.Point([parseInt(longitude), parseInt(latitude)])   
+            })
+            iconFeature.setStyle(style)
+            this.vectorSource.addFeature(iconFeature);
+          }
+        }
       }).catch(console.error)
     },
     initPokemon() {
       this.update()
     },
-    addPokemon: function (pokemon) {
-      const coordinates = new ol.geom.Point(pokemon.coordinate);
+    addPokemon (pokemon) {
+      const coordinates = new ol.geom.Point(pokemon.coordinate);  
       let iconFeature = new ol.Feature({
         geometry: coordinates
       });
