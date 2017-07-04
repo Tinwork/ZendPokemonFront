@@ -106,21 +106,7 @@ export default {
       this.$http.get(`${window.API}/api/geo/pokemons?long=48.8246&lat=2.56619&r=10000`).then(response => {
         const pokemonsIcons = response.data.response.result.collection
         for (let p of Object.entries(pokemonsIcons)) {
-          let { icon, position } = p[1].pokemon
-          let style = new ol.style.Style({
-            image: new ol.style.Icon({
-              src: icon
-            })
-          })
-          console.log('SRC of pokemon', icon)
-          for (let { latitude, longitude } of position) {
-            console.log('Postion:',latitude, longitude)
-            let iconFeature = new ol.Feature({
-              geometry: new ol.geom.Point([parseInt(longitude), parseInt(latitude)])   
-            })
-            iconFeature.setStyle(style)
-            this.vectorSource.addFeature(iconFeature);
-          }
+          this.addPokemon(p[1].pokemon)
         }
       }).catch(console.error)
     },
@@ -128,18 +114,19 @@ export default {
       this.update()
     },
     addPokemon (pokemon) {
-      const coordinates = new ol.geom.Point(pokemon.coordinate);  
-      let iconFeature = new ol.Feature({
-        geometry: coordinates
-      });
-      iconFeature.setStyle(
-        new ol.style.Style({
-          image: new ol.style.Icon({
-            src: pokemon.src || 'http://www.pokepedia.fr/images/7/72/Miniat_6_x_001.png'
-          })
+      let { icon, position } = pokemon
+      let style = new ol.style.Style({
+        image: new ol.style.Icon({
+          src: icon
         })
-      );
-      this.vectorSource.addFeature(iconFeature);
+      })
+      for (let { latitude, longitude } of position) {
+        let iconFeature = new ol.Feature({
+          geometry: new ol.geom.Point([parseInt(longitude), parseInt(latitude)])   
+        })
+        iconFeature.setStyle(style)
+        this.vectorSource.addFeature(iconFeature);
+      }
     }
   },
   mounted() {
