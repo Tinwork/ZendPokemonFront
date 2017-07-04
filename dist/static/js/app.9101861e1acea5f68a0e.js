@@ -736,7 +736,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         body: {
           rank: this.rank,
           name: this.name,
-          type_id: this.type,
+          type: this.type,
           evolutions: this.parseEvolutions(this.evolutions)
         }
       });
@@ -3714,4 +3714,4 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 
 /***/ })
 ]),[108]);
-//# sourceMappingURL=app.99d485cd20844657f39a.js.map
+//# sourceMappingURL=app.9101861e1acea5f68a0e.js.map
