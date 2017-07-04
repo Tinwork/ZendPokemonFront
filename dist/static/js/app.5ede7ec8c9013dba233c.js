@@ -1506,8 +1506,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   name: 'login',
   data() {
     return {
-      login: 'did',
-      password: 'root'
+      login: '',
+      password: ''
     };
   },
   methods: {
@@ -3714,4 +3714,4 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 
 /***/ })
 ]),[108]);
-//# sourceMappingURL=app.9101861e1acea5f68a0e.js.map
+//# sourceMappingURL=app.5ede7ec8c9013dba233c.js.map
