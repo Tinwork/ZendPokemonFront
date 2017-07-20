@@ -88,9 +88,8 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style lang="scss" scoped>
 .new-item {
-
   clear: both;
   overflow: auto;
   left: 0;
@@ -102,7 +101,6 @@ export default {
   padding: 20px;
   background: white;
   border-radius: 10px;
-
   box-shadow: 1px 1px 18px 0px black;
 }
 
@@ -117,39 +115,29 @@ export default {
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
-}
 
+  div {
+    position: relative;
+    height: 100%;
+    max-height: 200px;
+    max-width: 200px;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 50%;
+    margin: auto;
+    cursor: pointer;
+    border: 1px solid black;
+    transition: .1s border ease-in-out;
+  }
 
-.sub-evol>div,
-.post-evol>div {
-  position: relative;
-  height: 100%;
-  max-height: 200px;
-  max-width: 200px;
-  width: 100%;
-  overflow: hidden;
-  border-radius: 50%;
-  margin: auto;
-  cursor: pointer;
-  border: 1px solid black;
-  transition: .1s border ease-in-out;
-}
+  div:hover {
+    border: 5px solid black;
+  }
 
-
-.sub-evol>div:hover,
-.post-evol>div:hover {
-  border: 5px solid black;
-}
-
-
-.sub-evol img,
-.post-evol img {
-  width: 100%;
-  height: 100%;
-}
-
-.post-evol {
-  right: 0;
+  img {
+    width: 100%;
+    height: 100%;
+  }
 }
 
 .sub-evol {
@@ -157,7 +145,6 @@ export default {
 }
 
 img.main-display {
-
   transition: all .5s ease-in-out;
   width: 30vw;
   height: 30vw;

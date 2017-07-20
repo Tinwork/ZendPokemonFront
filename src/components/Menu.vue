@@ -92,7 +92,7 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style lang="scss" scoped>
 h3 {
   color: black;
   margin: 30px 0;
@@ -150,14 +150,14 @@ h3 {
   overflow: hidden;
   transition: 0.3s ease-out width;
   width: 0;
-}
 
-.menu-open.isOpen {
-  width: 500px;
-  border: 2px solid #696969;
-  border-top: 0;
-  border-bottom: 0;
-  border-left: 0px;
+  &.isOpen {
+    width: 500px;
+    border: 2px solid #696969;
+    border-top: 0;
+    border-bottom: 0;
+    border-left: 0px;
+  }
 }
 
 .close-menu {
@@ -170,22 +170,22 @@ h3 {
 .menu-list {
   margin: 10px 50px;
   text-align: left;
-}
 
-.menu-list a {
-  clear: both;
-  width: 100%;
-  float: left;
-  margin: 5px 0;
-  color: #696969;
-  text-decoration: none;
-  min-width: 400px;
-  transition: 0.3s ease-out all;
-}
+  a {
+    clear: both;
+    width: 100%;
+    float: left;
+    margin: 5px 0;
+    color: #696969;
+    text-decoration: none;
+    min-width: 400px;
+    transition: 0.3s ease-out all;
+  }
 
-.menu-list a:hover {
-  color: black;
-  margin-left: 5px;
+  a:hover {
+    color: black;
+    margin-left: 5px;
+  }
 }
 
 @media screen and (max-width: 700px) {
