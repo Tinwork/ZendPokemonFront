@@ -2,13 +2,15 @@
   <div class="item-show" :style="gradient(pokemon)">
     <div class="new-item">
       <h1>{{pokemon.name}}
-        <span>, Rank : {{pokemon.rank}}</span>
+        <span>Rang national : {{pokemon.rank}}</span>
       </h1>
       <div class="types" v-if="pokemon.type_id">
         <img class="type" :key="t" v-for="t in pokemon.type_id" :src="t.badge_path">
       </div>
   
       <img class=" main-display " :src="src(pokemon) ">
+
+      <button class="localize" @click="localize(pokemon)">Localiser ce pokemon</button>
     </div>
   
     <div v-if="typeof pokemon.evolutions !=='undefined' ">
@@ -77,6 +79,10 @@ export default {
             break
         }
       }
+    },
+    localize(pokemon) {
+      this.$store.commit('setPokemonMap', pokemon)
+      this.$router.push({name: 'Map' })
     }
   },
   computed: {
@@ -94,7 +100,7 @@ export default {
   overflow: auto;
   left: 0;
   right: 0;
-  margin: 10vh auto;
+  margin: 7vh auto;
   min-height: 500px;
   height: 50%;
   width: 50%;
@@ -102,6 +108,24 @@ export default {
   background: white;
   border-radius: 10px;
   box-shadow: 1px 1px 18px 0px black;
+}
+
+.localize {
+    border-radius: 32px;
+    color: white;
+    margin: 0px 4% 4% 0;
+    padding: 10px;
+    border: 0;
+    box-sizing: border-box;
+    background: #E3350D;
+    cursor: pointer;
+    box-shadow: 4px 4px black;
+    transition: all .3s;
+
+  &:hover {
+    background: #464a4c;
+    color: white;
+  }
 }
 
 .sub-evol,

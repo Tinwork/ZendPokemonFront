@@ -4,16 +4,16 @@
       <p>Name: {{ pokemon.name }}</p>
       <p>Rank: {{ pokemon.rank }}</p>
       <p>Id: {{ pokemon.id }}</p>
-      <p>Type: {{ pokemon.type_id }}</p>
+      <img v-for="t in pokemon.type_id" :src="t.badge_path">
       <div v-if="pokemon.evolutions.sub_evolution && pokemon.evolutions.sub_evolution.length > 0">
         <p>Sub evolution:</p>
-        <p v-for="evolution in pokemon.evolutions.sub_evolution"> Name: {{ evolution }}
+        <p v-for="evolution in pokemon.evolutions.sub_evolution"> Name: {{ evolution.name }}
         </p>
       </div>
   
       <div v-if="pokemon.evolutions.post_evolution && pokemon.evolutions.post_evolution.length > 0">
         <p>Post evolution:</p>
-        <p v-for="evolution in pokemon.evolutions.post_evolution"> Name: {{evolution }}</p>
+        <p v-for="evolution in pokemon.evolutions.post_evolution"> Name: {{evolution.name }}</p>
       </div>
   
       <button @click="setMode('edit')" type="button " class="btn btn-primary ">Edit</button>

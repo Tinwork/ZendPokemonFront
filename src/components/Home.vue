@@ -1,7 +1,6 @@
 <template>
   <div class="home">
     <ItemShow></ItemShow>
-    <ItemFilter></ItemFilter>
     <ItemList></ItemList>
   </div>
 </template>

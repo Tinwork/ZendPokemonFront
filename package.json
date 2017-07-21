@@ -10,7 +10,7 @@
     "build": "node build/build.js",
     "lint": "eslint --ext .js,.vue src",
     "postinstall": "npm install express",
-    "deploy": "npm run build && git add dist -f && git commit -m 'Deploy to Heroku' && git subtree push --prefix dist heroku maste"
+    "deploy": "npm run build && git add dist -f && git commit -m 'Deploy to Heroku' && git subtree push --prefix dist heroku master"
   },
   "dependencies": {
     "color": "^2.0.0",
@@ -77,9 +77,5 @@
     "node": ">= 4.0.0",
     "npm": ">= 3.0.0"
   },
-  "browserslist": [
-    "> 1%",
-    "last 2 versions",
-    "not ie <= 8"
-  ]
+  "browserslist": ["> 1%", "last 2 versions", "not ie <= 8"]
 }

@@ -1,5 +1,6 @@
 <template>
   <div class="item-list">
+    <ItemFilter></ItemFilter>
     <div class="item-list-container">
       <div class="item-list-content">
         <div :key="pokemon" class="item" v-for="pokemon in pokemons" @click="setPokemonShow(pokemon.rank)">
@@ -14,6 +15,8 @@
 </template>
 
 <script>
+import ItemFilter from './ItemFilter'
+
 export default {
   name: 'item-list',
   computed: {
@@ -29,6 +32,9 @@ export default {
     src: function (pokemon) {
       return pokemon.thumbnail
     }
+  },
+  components: {
+    ItemFilter
   }
 }
 </script>
@@ -58,6 +64,7 @@ export default {
   margin: 0px 4% 4% 0;
   float: left;
   text-align: center;
+  cursor: pointer;
 
   img {
     position: absolute;
