@@ -68,8 +68,9 @@ export default {
       });
 
       this.map.on("click", event => {
-        this.longitude = event.coordinate[0]
-        this.latitude = event.coordinate[1]
+        const lonlat = ol.proj.transform(event.coordinate, 'EPSG:3857', 'EPSG:4326');
+        this.longitude = lonlat[0]
+        this.latitude = lonlat[1]
       })
     },
     changeSelectedPokemon: function (event) {
@@ -81,6 +82,7 @@ export default {
       if (this.longitude && this.latitude) {
         const pok = this.$store.getters.pokemonMap
         const formData = new FormData()
+        
         let data = JSON.stringify({
           body: {
             longitude: this.longitude,
@@ -89,7 +91,6 @@ export default {
         })
         this.longitude = this.latitude = undefined
         formData.append('data', data);
-
         this.$http.post(`${window.API}/api/geo/pokemons/${pok.id}`, formData).then(response => {
           if (response.data.code === 200) {
             let newPokemon = {
@@ -115,18 +116,22 @@ export default {
     },
     addPokemon (pokemon) {
       let { icon, position } = pokemon
-      let style = new ol.style.Style({
-        image: new ol.style.Icon({
-          src: icon
+      if (position) {
+        let style = new ol.style.Style({
+          image: new ol.style.Icon({
+            src: icon
+          })
         })
-      })
-      for (let { latitude, longitude } of position) {
-        let iconFeature = new ol.Feature({
-          geometry: new ol.geom.Point([parseInt(longitude), parseInt(latitude)])   
-        })
-        iconFeature.setStyle(style)
-        this.vectorSource.addFeature(iconFeature);
+        for (let { latitude, longitude } of position) {
+          const lontlat = ol.proj.transform([parseInt(longitude), parseInt(latitude)], 'EPSG:4326','EPSG:3857');
+          let iconFeature = new ol.Feature({
+            geometry: new ol.geom.Point([parseInt(lontlat[0]), parseInt(lontlat[1])])   
+          })
+          iconFeature.setStyle(style)
+          this.vectorSource.addFeature(iconFeature);
+        }
       }
+      
     }
   },
   mounted() {
