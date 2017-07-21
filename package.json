@@ -10,7 +10,7 @@
     "build": "node build/build.js",
     "lint": "eslint --ext .js,.vue src",
     "postinstall": "npm install express",
-    "deploy": "npm run build && git add dist -f && git commit -m 'Deploy to Heroku' && git subtree push --prefix dist heroku master"
+    "deploy": "npm run build && git add dist -f && git commit -m 'Deploy to Heroku' && git subtree push --prefix dist origin heroku-deploy"
   },
   "dependencies": {
     "color": "^2.0.0",
