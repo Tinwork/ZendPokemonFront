@@ -22,10 +22,10 @@
 </script>
 
 <style scoped>
-nav {
-  overflow: auto;
-  box-sizing: border-box;
-  padding: 10px;
+nav {    overflow: hidden;
+    box-sizing: border-box;
+    padding: 10px;
+    width: 100%;
 }
 
 ul {

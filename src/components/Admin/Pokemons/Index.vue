@@ -5,7 +5,6 @@
         <tr>
           <th>Pokemon</th>
           <th>Rank</th>
-          <th>Type</th>
           <th>Actions</th>
         </tr>
       </thead>
@@ -13,7 +12,6 @@
         <tr class="pokemon" :key="pokemon" v-for="pokemon in pokemons">
           <th scope="row"> {{ pokemon.name }} </th>
           <td>{{ pokemon.rank }}</td>
-          <td>{{ pokemon.type }}</td>
           <td>
             <button @click="showPokemon(pokemon)" type="button " class="btn btn-primary ">Show</button>
             <button @click="deletePokemon(pokemon)" type="button " class="btn btn-danger ">Delete</button>
@@ -53,3 +51,15 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.pokemons {
+      width: 100%;
+    max-width: 1000px;
+    margin: auto;
+}
+
+* {
+      overflow-x: hidden;
+}
+</style>

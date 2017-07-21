@@ -168,6 +168,10 @@ export default {
   left: 0;
 }
 
+.post-evol {
+  right: 0;
+}
+
 img.main-display {
   transition: all .5s ease-in-out;
   width: 30vw;
