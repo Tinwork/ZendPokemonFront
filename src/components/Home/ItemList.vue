@@ -3,7 +3,9 @@
     <div class="item-list-container">
       <div class="item-list-content">
         <div :key="pokemon" class="item" v-for="pokemon in pokemons" @click="setPokemonShow(pokemon.rank)">
-          <img :src="src(pokemon)" alt="">
+          <div class="imgContainer">
+            <img :src="src(pokemon)" alt="">
+          </div>
           <h3>{{pokemon.name}}</h3>
         </div>
       </div>
@@ -32,9 +34,10 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style lang="scss" scoped>
 .item-list {
   margin: 0 0 50px 0;
+  background: url(/static/gaming-pattern.png);
 }
 
 .item-list-container {
@@ -50,33 +53,41 @@ export default {
 .item {
   width: 22%;
   min-height: 200px;
-
   background: #eee;
   border: 1px solid #333;
-
   margin: 0px 4% 4% 0;
   float: left;
   text-align: center;
-}
 
-.item img {
-  width: 100%;
-  padding: 20px;
-}
+  img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    width: 100%;
+    padding: 20px;
+  }
 
-.item h3 {
+  h3 {
+    text-align: center;
+    min-height: 50px;
+    margin: 0;
+    padding: 2px 5px;
+    background: #333;
+    color: white;
+    line-height: 50px;
+  }
 
-  text-align: center;
-  min-height: 50px;
-  margin: 0;
-  padding: 2px 5px;
-  background: #333;
-  color: white;
-  line-height: 50px;
-}
+  &:nth-child(4n) {
+    margin: 0 0 4% 0;
+  }
 
-.item:nth-child(4n) {
-  margin: 0 0 4% 0;
+  .imgContainer {
+    min-height: 400px;
+    position: relative;
+  }
 }
 
 @media screen and (max-width: 1350px) {

@@ -15,7 +15,7 @@
           Filter par nom desc
         </div>
       </div>
-
+  
       <!-- Add filter by name ? -->
     </div>
   </div>
@@ -37,11 +37,12 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style lang="scss" scoped>
 .item-filter {
   clear: both;
   overflow: auto;
-  margin: 40px 0 20px 0;
+  padding: 40px 0 0px 0;
+  background: url(/static/gaming-pattern.png);
 }
 
 .item-filter-container {
@@ -49,29 +50,30 @@ export default {
   max-width: 1500px;
 }
 
-
 .filter {
-
   width: 22%;
+  border-radius: 32px;
+  color: white;
   float: left;
   margin: 0px 4% 4% 0;
   padding: 10px;
   box-sizing: border-box;
-  background: #ccc;
+  background: #E3350D;
   cursor: pointer;
-  border: 1px solid #464a4c;
-  box-shadow: 4px 4px #464a4c;
+  box-shadow: 4px 4px rgb(0, 0, 0);
   transition: all .3s;
+
+  &:hover {
+    background: #464a4c;
+    color: white;
+  }
+
+  &:nth-child(4n) {
+    margin: 0 0 4% 0;
+  }
 }
 
-.filter:hover {
-  background: #464a4c;
-  color: white;
-}
 
-.filter:nth-child(4n) {
-  margin: 0 0 4% 0;
-}
 
 @media screen and (max-width: 1350px) {
   .item-filter-container {
@@ -82,7 +84,7 @@ export default {
 @media screen and (max-width: 700px) {
   .item-filter-container {
     max-width: calc(100% - 40px);
-  } 
+  }
 
   .filter-container {
     display: block;
